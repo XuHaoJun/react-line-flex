@@ -1,6 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["@workspace/ui"],
-}
+  /**
+   * Enable static exports.
+   *
+   * @see https://nextjs.org/docs/app/building-your-application/deploying/static-exports
+   */
+  output: 'export',
+  transpilePackages: ['@workspace/ui'],
+};
 
-export default nextConfig
+export default nextConfig;
