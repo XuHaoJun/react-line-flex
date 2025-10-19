@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { cn } from '@/lib/utils';
+
 import {
   getMarginClass,
   getMarginStyle,
@@ -7,10 +9,9 @@ import {
   getFlexClass,
   getFlexStyle,
   handleAction,
-} from '@/lib/lf-helpers';
-import type { FlexButton, FlexAction } from '@/lib/lf-types';
-import { positionVariants, gravityVariants, buttonStyleVariants } from '@/lib/lf-variants';
-import { cn } from '@/lib/utils';
+} from './utils/lf-helpers';
+import type { FlexButton, FlexAction } from './utils/lf-types';
+import { positionVariants, gravityVariants, buttonStyleVariants } from './utils/lf-variants';
 
 export type LfButtonProps = FlexButton & {
   className?: string;

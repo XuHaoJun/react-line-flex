@@ -1,6 +1,8 @@
 import * as React from 'react';
 
-import { LfSpan } from '@/components/lf-span';
+import { cn } from '@/lib/utils';
+
+import { LfSpan } from './lf-span';
 import {
   getSizeClass,
   getSizeStyle,
@@ -10,8 +12,8 @@ import {
   getFlexClass,
   getFlexStyle,
   handleAction,
-} from '@/lib/lf-helpers';
-import type { FlexText, FlexSpan, FlexAction } from '@/lib/lf-types';
+} from './utils/lf-helpers';
+import type { FlexText, FlexSpan, FlexAction } from './utils/lf-types';
 import {
   positionVariants,
   weightVariants,
@@ -19,8 +21,7 @@ import {
   decorationVariants,
   alignVariants,
   gravityVariants,
-} from '@/lib/lf-variants';
-import { cn } from '@/lib/utils';
+} from './utils/lf-variants';
 
 export type LfTextProps = FlexText & {
   className?: string;

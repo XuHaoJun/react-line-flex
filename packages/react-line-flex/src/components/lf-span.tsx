@@ -1,9 +1,10 @@
 import * as React from 'react';
 
-import { getSizeClass, getSizeStyle } from '@/lib/lf-helpers';
-import type { FlexSpan } from '@/lib/lf-types';
-import { weightVariants, styleVariants, decorationVariants } from '@/lib/lf-variants';
 import { cn } from '@/lib/utils';
+
+import { getSizeClass, getSizeStyle } from './utils/lf-helpers';
+import type { FlexSpan } from './utils/lf-types';
+import { weightVariants, styleVariants, decorationVariants } from './utils/lf-variants';
 
 export interface LfSpanProps extends FlexSpan {
   className?: string;

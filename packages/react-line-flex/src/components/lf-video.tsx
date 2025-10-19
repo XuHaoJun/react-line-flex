@@ -1,8 +1,9 @@
 import * as React from 'react';
 
-import type { FlexVideo } from '@/lib/lf-types';
-import { aspectRatioVariants } from '@/lib/lf-variants';
 import { cn } from '@/lib/utils';
+
+import type { FlexVideo } from './utils/lf-types';
+import { aspectRatioVariants } from './utils/lf-variants';
 
 export interface LfVideoProps extends FlexVideo {
   className?: string;

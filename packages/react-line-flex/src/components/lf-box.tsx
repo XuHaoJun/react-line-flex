@@ -1,14 +1,16 @@
 import * as React from 'react';
 
+import { cn } from '@/lib/utils';
+
 // Import component renderers
-import { LfButton } from '@/components/lf-button';
-import { LfFiller } from '@/components/lf-filler';
-import { LfIcon } from '@/components/lf-icon';
-import { LfImage } from '@/components/lf-image';
-import { LfSeparator } from '@/components/lf-separator';
-import { LfSpacer } from '@/components/lf-spacer';
-import { LfText } from '@/components/lf-text';
-import { LfVideo } from '@/components/lf-video';
+import { LfButton } from './lf-button';
+import { LfFiller } from './lf-filler';
+import { LfIcon } from './lf-icon';
+import { LfImage } from './lf-image';
+import { LfSeparator } from './lf-separator';
+import { LfSpacer } from './lf-spacer';
+import { LfText } from './lf-text';
+import { LfVideo } from './lf-video';
 import {
   getMarginClass,
   getMarginStyle,
@@ -24,10 +26,9 @@ import {
   getBorderWidthStyle,
   getBackgroundGradientStyle,
   handleAction,
-} from '@/lib/lf-helpers';
-import type { FlexBox, FlexComponent, FlexAction } from '@/lib/lf-types';
-import { layoutVariants, positionVariants, justifyContentVariants, alignItemsVariants } from '@/lib/lf-variants';
-import { cn } from '@/lib/utils';
+} from './utils/lf-helpers';
+import type { FlexBox, FlexComponent, FlexAction } from './utils/lf-types';
+import { layoutVariants, positionVariants, justifyContentVariants, alignItemsVariants } from './utils/lf-variants';
 
 export type LfBoxProps = FlexBox & {
   className?: string;

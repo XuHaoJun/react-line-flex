@@ -11,79 +11,88 @@
       "files": [
         {
           "path": "src/components/lf-box.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/line-flex/lf-box.tsx"
         },
         {
           "path": "src/components/lf-bubble.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/line-flex/lf-bubble.tsx"
         },
         {
           "path": "src/components/lf-button.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/line-flex/lf-button.tsx"
         },
         {
           "path": "src/components/lf-carousel.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/line-flex/lf-carousel.tsx"
         },
         {
           "path": "src/components/lf-container.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/line-flex/lf-container.tsx"
         },
         {
           "path": "src/components/lf-filler.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/line-flex/lf-filler.tsx"
         },
         {
           "path": "src/components/lf-icon.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/line-flex/lf-icon.tsx"
         },
         {
           "path": "src/components/lf-image.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/line-flex/lf-image.tsx"
         },
         {
           "path": "src/components/index.ts",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/line-flex/index.ts"
         },
         {
           "path": "src/components/lf-separator.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/line-flex/lf-separator.tsx"
         },
         {
           "path": "src/components/lf-spacer.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/line-flex/lf-spacer.tsx"
         },
         {
           "path": "src/components/lf-span.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/line-flex/lf-span.tsx"
         },
         {
           "path": "src/components/lf-text.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/line-flex/lf-text.tsx"
         },
         {
           "path": "src/components/lf-video.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/line-flex/lf-video.tsx"
         },
         {
-          "path": "src/lib/lf-helpers.ts",
-          "type": "registry:lib"
+          "path": "src/components/utils/lf-helpers.ts",
+          "type": "registry:lib",
+          "target": "components/line-flex/utils/lf-helpers.ts"
         },
         {
-          "path": "src/lib/utils.ts",
-          "type": "registry:lib"
+          "path": "src/components/utils/lf-types.ts",
+          "type": "registry:lib",
+          "target": "components/line-flex/utils/lf-types.ts"
         },
         {
-          "path": "src/lib/lf-types.ts",
-          "type": "registry:lib"
-        },
-        {
-          "path": "src/lib/lf-variants.ts",
-          "type": "registry:lib"
-        },
-        {
-          "path": "src/styles.css",
-          "type": "registry:lib"
+          "path": "src/components/utils/lf-variants.ts",
+          "type": "registry:lib",
+          "target": "components/line-flex/utils/lf-variants.ts"
         }
       ],
       "npmPackageName": "react-line-flex"

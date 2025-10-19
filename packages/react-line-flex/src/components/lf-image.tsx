@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { cn } from '@/lib/utils';
+
 import {
   getMarginClass,
   getMarginStyle,
@@ -7,10 +9,9 @@ import {
   getFlexClass,
   getFlexStyle,
   handleAction,
-} from '@/lib/lf-helpers';
-import type { FlexImage, FlexAction } from '@/lib/lf-types';
-import { positionVariants, gravityVariants, aspectRatioVariants, aspectModeVariants } from '@/lib/lf-variants';
-import { cn } from '@/lib/utils';
+} from './utils/lf-helpers';
+import type { FlexImage, FlexAction } from './utils/lf-types';
+import { positionVariants, gravityVariants, aspectRatioVariants, aspectModeVariants } from './utils/lf-variants';
 
 export type LfImageProps = FlexImage & {
   className?: string;

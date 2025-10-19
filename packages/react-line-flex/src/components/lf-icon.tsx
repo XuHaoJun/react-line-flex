@@ -1,9 +1,10 @@
 import * as React from 'react';
 
-import { getSizeClass, getSizeStyle, getMarginClass, getMarginStyle, getOffsetStyles } from '@/lib/lf-helpers';
-import type { FlexIcon } from '@/lib/lf-types';
-import { positionVariants } from '@/lib/lf-variants';
 import { cn } from '@/lib/utils';
+
+import { getSizeClass, getSizeStyle, getMarginClass, getMarginStyle, getOffsetStyles } from './utils/lf-helpers';
+import type { FlexIcon } from './utils/lf-types';
+import { positionVariants } from './utils/lf-variants';
 
 export type LfIconProps = FlexIcon & {
   className?: string;

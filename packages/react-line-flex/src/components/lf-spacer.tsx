@@ -1,7 +1,8 @@
 import * as React from 'react';
 
-import type { FlexSpacer } from '@/lib/lf-types';
 import { cn } from '@/lib/utils';
+
+import type { FlexSpacer } from './utils/lf-types';
 
 export type LfSpacerProps = FlexSpacer & {
   className?: string;

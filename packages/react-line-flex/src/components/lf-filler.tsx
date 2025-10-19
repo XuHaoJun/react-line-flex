@@ -1,8 +1,9 @@
 import * as React from 'react';
 
-import { getFlexClass, getFlexStyle } from '@/lib/lf-helpers';
-import type { FlexFiller } from '@/lib/lf-types';
 import { cn } from '@/lib/utils';
+
+import { getFlexClass, getFlexStyle } from './utils/lf-helpers';
+import type { FlexFiller } from './utils/lf-types';
 
 export interface LfFillerProps extends FlexFiller {
   className?: string;

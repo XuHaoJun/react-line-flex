@@ -1,10 +1,11 @@
 import * as React from 'react';
 
-import { LfBox, renderLfFlexComponent } from '@/components/lf-box';
-import { handleAction } from '@/lib/lf-helpers';
-import type { FlexBubble, FlexAction } from '@/lib/lf-types';
-import { bubbleSizeVariants } from '@/lib/lf-variants';
 import { cn } from '@/lib/utils';
+
+import { LfBox, renderLfFlexComponent } from './lf-box';
+import { handleAction } from './utils/lf-helpers';
+import type { FlexBubble, FlexAction } from './utils/lf-types';
+import { bubbleSizeVariants } from './utils/lf-variants';
 
 export interface LfBubbleProps extends FlexBubble {
   className?: string;

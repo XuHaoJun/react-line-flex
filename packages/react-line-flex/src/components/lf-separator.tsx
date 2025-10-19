@@ -1,8 +1,9 @@
 import * as React from 'react';
 
-import { getMarginClass, getMarginStyle } from '@/lib/lf-helpers';
-import type { FlexSeparator } from '@/lib/lf-types';
 import { cn } from '@/lib/utils';
+
+import { getMarginClass, getMarginStyle } from './utils/lf-helpers';
+import type { FlexSeparator } from './utils/lf-types';
 
 export interface LfSeparatorProps extends FlexSeparator {
   className?: string;

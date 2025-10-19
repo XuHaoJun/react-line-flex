@@ -1,8 +1,9 @@
 import * as React from 'react';
 
-import { LfBubble } from '@/components/lf-bubble';
-import type { FlexCarousel, FlexAction } from '@/lib/lf-types';
 import { cn } from '@/lib/utils';
+
+import { LfBubble } from './lf-bubble';
+import type { FlexCarousel, FlexAction } from './utils/lf-types';
 
 export interface LfCarouselProps extends FlexCarousel {
   className?: string;

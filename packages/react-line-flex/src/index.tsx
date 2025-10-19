@@ -80,7 +80,7 @@ export type {
   FlexBorderWidth,
   FlexBackground,
   FlexBubbleStyles,
-} from '@/lib/lf-types';
+} from '@/components/utils/lf-types';
 
 // Utility exports
 export { cn } from '@/lib/utils';
@@ -103,4 +103,4 @@ export {
   handleAction,
   getSizeClass,
   getSizeStyle,
-} from '@/lib/lf-helpers';
+} from '@/components/utils/lf-helpers';
