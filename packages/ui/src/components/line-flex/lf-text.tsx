@@ -6,6 +6,8 @@ import { LfSpan } from './lf-span';
 import {
   getSizeClass,
   getSizeStyle,
+  getMarginClass,
+  getMarginStyle,
   getTextMarginClass,
   getTextMarginStyle,
   getOffsetStyles,
@@ -25,6 +27,7 @@ import {
 
 export type LfTextProps = FlexText & {
   className?: string;
+  layout?: 'horizontal' | 'vertical' | 'baseline';
   onAction?: (action: FlexAction) => void;
 };
 
@@ -51,6 +54,7 @@ const LfText = React.forwardRef<HTMLDivElement, LfTextProps>(
       decoration,
       lineSpacing,
       action,
+      layout,
       onAction,
       className,
     },
@@ -58,8 +62,12 @@ const LfText = React.forwardRef<HTMLDivElement, LfTextProps>(
   ) => {
     const sizeClass = getSizeClass(size);
     const sizeStyle = getSizeStyle(size);
-    const marginClass = getTextMarginClass(margin);
-    const marginStyle = getTextMarginStyle(margin);
+
+    // Use margin-left for baseline/horizontal layout, margin-top for vertical layout
+    const isBaselineOrHorizontal = layout === 'baseline' || layout === 'horizontal';
+    const marginClass = isBaselineOrHorizontal ? getTextMarginClass(margin) : getMarginClass(margin);
+    const marginStyle = isBaselineOrHorizontal ? getTextMarginStyle(margin) : getMarginStyle(margin);
+
     const offsetStyles = getOffsetStyles(offsetTop, offsetBottom, offsetStart, offsetEnd);
     const flexClass = getFlexClass(flex);
     const flexStyle = getFlexStyle(flex);

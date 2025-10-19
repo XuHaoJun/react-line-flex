@@ -12,15 +12,21 @@ export interface LfSeparatorProps extends FlexSeparator {
 
 const LfSeparator = React.forwardRef<HTMLDivElement, LfSeparatorProps>(
   ({ margin, color, className, layout = 'vertical' }, ref) => {
+    const isHorizontal = layout === 'horizontal' || layout === 'baseline';
+
+    // Separator uses margin-top for vertical layout, margin-left for horizontal
     const marginClass = getMarginClass(margin);
-    const marginStyle = getMarginStyle(margin);
+    const marginStyle: React.CSSProperties =
+      margin && (margin.includes('px') || margin.includes('%'))
+        ? isHorizontal
+          ? { marginLeft: margin }
+          : { marginTop: margin }
+        : {};
 
     const style: React.CSSProperties = {
       ...marginStyle,
       ...(color && { borderColor: color }),
     };
-
-    const isHorizontal = layout === 'horizontal' || layout === 'baseline';
 
     return (
       <div

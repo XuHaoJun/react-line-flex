@@ -65,7 +65,7 @@ const LfImage = React.forwardRef<HTMLDivElement, LfImageProps>(
     // Dynamically calculate from aspectRatio string (e.g., '2:3' -> 3*100/2 = 150%)
     const calculateAspectRatio = (ratio: string | undefined): number => {
       if (!ratio) return 100;
-      
+
       const parts = ratio.split(':');
       if (parts.length === 2 && parts[0] && parts[1]) {
         const width = parseFloat(parts[0]);
@@ -74,7 +74,7 @@ const LfImage = React.forwardRef<HTMLDivElement, LfImageProps>(
           return (height * 100) / width;
         }
       }
-      
+
       return 100;
     };
 
@@ -109,7 +109,7 @@ const LfImage = React.forwardRef<HTMLDivElement, LfImageProps>(
       <div
         ref={ref}
         className={cn(
-          'relative flex min-w-0 items-center overflow-hidden',
+          'relative flex min-w-0 flex-col items-center overflow-hidden',
           flexClass,
           marginClass,
           position && positionVariants({ position }),

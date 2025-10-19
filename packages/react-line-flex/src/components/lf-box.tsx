@@ -60,7 +60,7 @@ export function renderLfFlexComponent(
     case 'spacer':
       return <LfSpacer key={key} {...component} />;
     case 'text':
-      return <LfText key={key} {...component} onAction={onAction} />;
+      return <LfText key={key} {...component} layout={layout} onAction={onAction} />;
     case 'video':
       return <LfVideo key={key} {...component} />;
     default:
