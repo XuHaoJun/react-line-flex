@@ -3,7 +3,7 @@
 import { Github } from 'lucide-react';
 
 import { Button } from '@workspace/ui/components/button';
-import { LfBubble, LfCarousel } from '@workspace/ui/components/line-flex';
+import { LfBubble, LfCarousel, LfMessage } from '@workspace/ui/components/line-flex';
 
 import flexSamples from './flex-samples.json';
 
@@ -73,12 +73,8 @@ export default function Home() {
                   {sample.contents.type}
                 </span>
               </div>
-              <div className="flex min-h-[400px] min-w-[500px] overflow-hidden rounded-lg border bg-[#849EBF] p-1 pt-[50px] pl-5 shadow-sm transition-shadow hover:shadow-lg">
-                {sample.contents.type === 'bubble' ? (
-                  <LfBubble {...(sample.contents as any)} onAction={handleAction} />
-                ) : (
-                  <LfCarousel {...(sample.contents as any)} onAction={handleAction} />
-                )}
+              <div className="flex min-h-[800px] min-w-[500px] overflow-hidden rounded-lg border bg-[#849EBF] p-1 pt-[50px] pb-4 pl-5 shadow-sm transition-shadow hover:shadow-lg">
+                <LfMessage className="h-full w-full" {...(sample as unknown as any)} onAction={handleAction} />
               </div>
             </div>
           ))}

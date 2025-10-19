@@ -1,4 +1,5 @@
 export { LfContainer } from './lf-container';
+export { LfMessage } from './lf-message';
 export { LfBubble } from './lf-bubble';
 export { LfCarousel } from './lf-carousel';
 export { LfBox, renderLfFlexComponent } from './lf-box';
@@ -13,6 +14,7 @@ export { LfFiller } from './lf-filler';
 export { LfSpacer } from './lf-spacer';
 
 export type { LfContainerProps } from './lf-container';
+export type { LfMessageProps } from './lf-message';
 export type { LfBubbleProps } from './lf-bubble';
 export type { LfCarouselProps } from './lf-carousel';
 export type { LfBoxProps } from './lf-box';

@@ -11,7 +11,7 @@ import {
   handleAction,
 } from './utils/lf-helpers';
 import type { FlexImage, FlexAction } from './utils/lf-types';
-import { positionVariants, gravityVariants, aspectRatioVariants, aspectModeVariants } from './utils/lf-variants';
+import { positionVariants, gravityVariants } from './utils/lf-variants';
 
 export type LfImageProps = FlexImage & {
   className?: string;
@@ -61,6 +61,24 @@ const LfImage = React.forwardRef<HTMLDivElement, LfImageProps>(
       full: 'w-full',
     };
 
+    // Calculate padding-bottom percentage for aspect ratio (like flex2html.js)
+    const aspectRatioMap: Record<string, number> = {
+      '1:1': 100,
+      '1.51:1': 66.22517,
+      '1.91:1': 52.35602,
+      '20:13': 65,
+      '4:3': 75,
+      '16:9': 56.25,
+      '2:1': 50,
+      '3:1': 33.33333,
+      '3:4': 133.33333,
+      '9:16': 177.77778,
+      '1:2': 200,
+      '1:3': 300,
+    };
+
+    const paddingBottom = aspectRatio ? aspectRatioMap[aspectRatio] || 100 : 100;
+
     const sizeClass =
       typeof size === 'string' && !size.includes('px') && !size.includes('%') ? imageSizeMap[size] || 'w-[100px]' : '';
 
@@ -71,8 +89,13 @@ const LfImage = React.forwardRef<HTMLDivElement, LfImageProps>(
       ...(typeof size === 'string' && (size.includes('px') || size.includes('%')) && { width: size }),
     };
 
+    const linkStyle: React.CSSProperties = {
+      paddingBottom: `${paddingBottom}%`,
+    };
+
     const imageStyle: React.CSSProperties = {
       backgroundImage: `url('${url}')`,
+      backgroundSize: aspectMode === 'cover' ? 'cover' : 'contain',
       ...(backgroundColor && { backgroundColor }),
     };
 
@@ -101,31 +124,23 @@ const LfImage = React.forwardRef<HTMLDivElement, LfImageProps>(
               href={action.uri}
               target="_blank"
               rel="noopener noreferrer"
-              className={cn('relative block w-full', aspectRatio && aspectRatioVariants({ aspectRatio }))}
+              className="relative block w-full"
+              style={linkStyle}
               onClick={clickHandler}
             >
               <span
-                className={cn(
-                  'absolute inset-0 block overflow-hidden bg-center bg-no-repeat',
-                  aspectMode && aspectModeVariants({ aspectMode }),
-                )}
+                className="absolute inset-0 top-0 right-0 bottom-0 left-0 block overflow-hidden bg-center bg-no-repeat"
                 style={imageStyle}
               />
             </a>
           ) : (
             <div
-              className={cn(
-                'relative block w-full',
-                aspectRatio && aspectRatioVariants({ aspectRatio }),
-                action && 'cursor-pointer',
-              )}
+              className={cn('relative block w-full', action && 'cursor-pointer')}
+              style={linkStyle}
               onClick={clickHandler}
             >
               <span
-                className={cn(
-                  'absolute inset-0 block overflow-hidden bg-center bg-no-repeat',
-                  aspectMode && aspectModeVariants({ aspectMode }),
-                )}
+                className="absolute inset-0 top-0 right-0 bottom-0 left-0 block overflow-hidden bg-center bg-no-repeat"
                 style={imageStyle}
               />
             </div>

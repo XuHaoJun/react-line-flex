@@ -14,7 +14,7 @@ const LfCarousel = React.forwardRef<HTMLDivElement, LfCarouselProps>(({ contents
   return (
     <div
       ref={ref}
-      className={cn('scrollbar-hide overflow-x-auto overflow-y-hidden', '-webkit-overflow-scrolling-touch', className)}
+      className={cn('scrollbar-hide overflow-x-auto overflow-y-hidden', '-webkit-overflow-scrolling-touch', 'w-full', className)}
     >
       <div className="flex w-full gap-[9px] pl-[7px] after:block after:h-px after:w-[7px] after:flex-none after:content-['']">
         {contents.map((bubble, index) => (

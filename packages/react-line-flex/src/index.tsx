@@ -2,6 +2,9 @@
 export { LfContainer } from '@/components/lf-container';
 export type { LfContainerProps } from '@/components/lf-container';
 
+export { LfMessage } from '@/components/lf-message';
+export type { LfMessageProps } from '@/components/lf-message';
+
 export { LfBubble } from '@/components/lf-bubble';
 export type { LfBubbleProps } from '@/components/lf-bubble';
 

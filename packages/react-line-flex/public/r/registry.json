@@ -10,6 +10,11 @@
       "description": "A React component library for rendering LINE Flex Messages with Tailwind CSS",
       "files": [
         {
+          "path": "src/components/lf-message.tsx",
+          "type": "registry:component",
+          "target": "components/line-flex/lf-message.tsx"
+        },
+        {
           "path": "src/components/lf-box.tsx",
           "type": "registry:component",
           "target": "components/line-flex/lf-box.tsx"
