@@ -18,49 +18,6 @@ const LfBubble = React.forwardRef<HTMLDivElement, LfBubbleProps>(
 
     const directionClass = direction === 'rtl' ? 'dir-rtl' : 'dir-ltr';
 
-    // Padding classes based on bubble size
-    const getPadding = (section: 'header' | 'body' | 'footer') => {
-      const sizeMap: Record<string, Record<string, string>> = {
-        nano: {
-          header: 'p-[10px]',
-          body: 'p-[10px] pt-[10px]',
-          footer: 'p-[10px]',
-        },
-        micro: {
-          header: 'p-[10px]',
-          body: 'p-[10px] pt-[10px]',
-          footer: 'p-[10px]',
-        },
-        deca: {
-          header: 'p-[11px_14px_13px]',
-          body: 'p-[11px_14px_13px]',
-          footer: 'p-[10px]',
-        },
-        hecto: {
-          header: 'p-[11px_14px_13px]',
-          body: 'p-[11px_14px_13px]',
-          footer: 'p-[10px]',
-        },
-        kilo: {
-          header: 'p-[13px]',
-          body: 'p-[13px]',
-          footer: 'p-[10px]',
-        },
-        mega: {
-          header: 'p-5',
-          body: 'p-5 pt-[19px]',
-          footer: 'p-[10px]',
-        },
-        giga: {
-          header: 'p-5',
-          body: 'p-5 pt-[19px]',
-          footer: 'p-[10px]',
-        },
-      };
-
-      return sizeMap[size]?.[section] || sizeMap.mega?.[section];
-    };
-
     return (
       <div
         ref={ref}
@@ -71,10 +28,20 @@ const LfBubble = React.forwardRef<HTMLDivElement, LfBubbleProps>(
         {/* Header */}
         {header && (
           <div
-            className={cn('flex-none', getPadding('header'))}
+            className="flex-none"
             style={styles?.header?.backgroundColor ? { backgroundColor: styles.header.backgroundColor } : undefined}
           >
-            <LfBox {...header} onAction={onAction} />
+            <LfBox
+              {...header}
+              onAction={onAction}
+              {...(header.paddingAll === undefined &&
+                header.paddingTop === undefined &&
+                header.paddingBottom === undefined &&
+                header.paddingStart === undefined &&
+                header.paddingEnd === undefined && {
+                  paddingAll: size === 'mega' || size === 'giga' ? '20px' : size === 'kilo' ? '13px' : size === 'nano' || size === 'micro' ? '10px' : '11px',
+                })}
+            />
           </div>
         )}
 
@@ -95,20 +62,42 @@ const LfBubble = React.forwardRef<HTMLDivElement, LfBubbleProps>(
         {/* Body */}
         {body && (
           <div
-            className={cn('flex-1 flex-col', getPadding('body'), footer && 'pb-[10px]')}
+            className="flex-1 flex-col"
             style={styles?.body?.backgroundColor ? { backgroundColor: styles.body.backgroundColor } : undefined}
           >
-            <LfBox {...body} onAction={onAction} />
+            <LfBox
+              {...body}
+              onAction={onAction}
+              {...(body.paddingAll === undefined &&
+                body.paddingTop === undefined &&
+                body.paddingBottom === undefined &&
+                body.paddingStart === undefined &&
+                body.paddingEnd === undefined && {
+                  paddingAll: size === 'mega' || size === 'giga' ? '20px' : size === 'kilo' ? '13px' : size === 'nano' || size === 'micro' ? '10px' : '11px',
+                  paddingTop: size === 'mega' || size === 'giga' ? '19px' : undefined,
+                  paddingBottom: footer ? (size === 'kilo' || size === 'hecto' || size === 'deca' ? '17px' : '10px') : undefined,
+                })}
+            />
           </div>
         )}
 
         {/* Footer */}
         {footer && (
           <div
-            className={cn('flex-none', getPadding('footer'))}
+            className="flex-none"
             style={styles?.footer?.backgroundColor ? { backgroundColor: styles.footer.backgroundColor } : undefined}
           >
-            <LfBox {...footer} onAction={onAction} />
+            <LfBox
+              {...footer}
+              onAction={onAction}
+              {...(footer.paddingAll === undefined &&
+                footer.paddingTop === undefined &&
+                footer.paddingBottom === undefined &&
+                footer.paddingStart === undefined &&
+                footer.paddingEnd === undefined && {
+                  paddingAll: '10px',
+                })}
+            />
           </div>
         )}
       </div>
