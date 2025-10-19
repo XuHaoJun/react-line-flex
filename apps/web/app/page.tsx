@@ -143,13 +143,13 @@ const Example = () => {
           {flexSamples.map((sample, index) => (
             <div key={index} className="flex flex-col gap-2">
               <div className="flex items-center justify-between">
-                <span className="text-muted-foreground text-xs font-medium">Example {index + 1}</span>
+                <span className="text-muted-foreground text-xs font-medium">{sample.title}</span>
                 <span className="bg-primary/10 text-primary rounded-full px-2 py-0.5 text-xs font-medium">
-                  {sample.contents.type}
+                  {sample.content.contents.type}
                 </span>
               </div>
               <div className="flex min-h-[800px] min-w-[500px] overflow-hidden rounded-lg border bg-[#849EBF] p-1 pt-[50px] pb-4 pl-5 shadow-sm transition-shadow hover:shadow-lg">
-                <LfMessage className="h-full w-full" {...(sample as unknown as any)} onAction={handleAction} />
+                <LfMessage className="h-full w-full" {...(sample.content as unknown as any)} onAction={handleAction} />
               </div>
             </div>
           ))}

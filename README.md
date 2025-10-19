@@ -1,6 +1,6 @@
 # react-line-flex
 
-A comprehensive React component library for rendering [LINE Flex Messages](https://developers.line.biz/en/docs/messaging-api/using-flex-messages/) with full TypeScript support, Tailwind CSS V4 styling, and shadcn/ui integration.
+A comprehensive React component library for rendering [LINE Flex Messages](https://developers.line.biz/en/docs/messaging-api/using-flex-messages/) with full TypeScript support, Tailwind CSS V4 styling, and [shadcn/ui](https://ui.shadcn.com/) integration.
 
 Live Demo: https://xuhaojun.github.io/react-line-flex
 
@@ -13,49 +13,49 @@ shadcn add https://raw.githubusercontent.com/XuHaoJun/react-line-flex/refs/heads
 ## Usage
 
 ```tsx
-import { LfMessage } from "@/components/ui/line-flex";
+import { LfMessage } from '@/components/ui/line-flex';
 
 const message = {
-  type: "flex",
-  altText: "Flex Message",
+  type: 'flex',
+  altText: 'Flex Message',
   contents: {
-    type: "bubble",
+    type: 'bubble',
     hero: {
-      type: "image",
-      url: "https://developers-resource.landpress.line.me/fx/img/01_1_cafe.png",
-      size: "full",
-      aspectRatio: "20:13",
-      aspectMode: "cover",
+      type: 'image',
+      url: 'https://developers-resource.landpress.line.me/fx/img/01_1_cafe.png',
+      size: 'full',
+      aspectRatio: '20:13',
+      aspectMode: 'cover',
       action: {
-        type: "uri",
-        uri: "https://line.me/",
+        type: 'uri',
+        uri: 'https://line.me/',
       },
     },
     body: {
-      type: "box",
-      layout: "vertical",
+      type: 'box',
+      layout: 'vertical',
       contents: [
         {
-          type: "text",
-          text: "Brown Cafe",
-          weight: "bold",
-          size: "xl",
+          type: 'text',
+          text: 'Brown Cafe',
+          weight: 'bold',
+          size: 'xl',
         },
       ],
     },
     footer: {
-      type: "box",
-      layout: "vertical",
-      spacing: "sm",
+      type: 'box',
+      layout: 'vertical',
+      spacing: 'sm',
       contents: [
         {
-          type: "button",
-          style: "link",
-          height: "sm",
+          type: 'button',
+          style: 'link',
+          height: 'sm',
           action: {
-            type: "uri",
-            label: "CALL",
-            uri: "https://line.me/",
+            type: 'uri',
+            label: 'CALL',
+            uri: 'https://line.me/',
           },
         },
       ],
