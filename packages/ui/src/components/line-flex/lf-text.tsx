@@ -142,8 +142,9 @@ const LfText = React.forwardRef<HTMLDivElement, LfTextProps>(
       <div
         ref={ref}
         className={cn(
-          'relative min-w-0',
-          flexClass,
+          'relative min-w-0 max-w-full flex flex-col',
+          // Default to flex-1 when flex is not specified (matching .MdTxt behavior)
+          flex === undefined ? 'flex-1' : flexClass,
           sizeClass,
           marginClass,
           position && positionVariants({ position }),

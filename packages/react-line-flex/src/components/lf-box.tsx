@@ -142,7 +142,8 @@ const LfBox = React.forwardRef<HTMLDivElement, LfBoxProps>(
         className={cn(
           'lf-box relative max-w-full min-w-0 overflow-hidden',
           layoutVariants({ layout }),
-          flexClass,
+          // Default to flex-1 when flex is not specified (matching .MdBx behavior)
+          flex === undefined ? 'flex-1' : flexClass,
           spacingClass,
           marginClass,
           cornerRadiusClass,

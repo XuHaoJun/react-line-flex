@@ -109,8 +109,9 @@ const LfImage = React.forwardRef<HTMLDivElement, LfImageProps>(
       <div
         ref={ref}
         className={cn(
-          'relative flex min-w-0 flex-col items-center overflow-hidden',
-          flexClass,
+          'relative flex min-w-0 max-w-full flex-col items-center overflow-hidden',
+          // Default to flex-1 when flex is not specified (matching .MdImg behavior)
+          flex === undefined ? 'flex-1' : flexClass,
           marginClass,
           position && positionVariants({ position }),
           alignClass,

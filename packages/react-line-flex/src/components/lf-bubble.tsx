@@ -28,7 +28,7 @@ const LfBubble = React.forwardRef<HTMLDivElement, LfBubbleProps>(
         {/* Header */}
         {header && (
           <div
-            className="flex-none"
+            className="flex flex-none flex-col"
             style={styles?.header?.backgroundColor ? { backgroundColor: styles.header.backgroundColor } : undefined}
           >
             <LfBox
@@ -39,7 +39,14 @@ const LfBubble = React.forwardRef<HTMLDivElement, LfBubbleProps>(
                 header.paddingBottom === undefined &&
                 header.paddingStart === undefined &&
                 header.paddingEnd === undefined && {
-                  paddingAll: size === 'mega' || size === 'giga' ? '20px' : size === 'kilo' ? '13px' : size === 'nano' || size === 'micro' ? '10px' : '11px',
+                  paddingAll:
+                    size === 'mega' || size === 'giga'
+                      ? '20px'
+                      : size === 'kilo'
+                        ? '13px'
+                        : size === 'nano' || size === 'micro'
+                          ? '10px'
+                          : '11px',
                 })}
             />
           </div>
@@ -62,7 +69,7 @@ const LfBubble = React.forwardRef<HTMLDivElement, LfBubbleProps>(
         {/* Body */}
         {body && (
           <div
-            className="flex-1 flex-col"
+            className="flex flex-1 flex-col"
             style={styles?.body?.backgroundColor ? { backgroundColor: styles.body.backgroundColor } : undefined}
           >
             <LfBox
@@ -73,9 +80,20 @@ const LfBubble = React.forwardRef<HTMLDivElement, LfBubbleProps>(
                 body.paddingBottom === undefined &&
                 body.paddingStart === undefined &&
                 body.paddingEnd === undefined && {
-                  paddingAll: size === 'mega' || size === 'giga' ? '20px' : size === 'kilo' ? '13px' : size === 'nano' || size === 'micro' ? '10px' : '11px',
+                  paddingAll:
+                    size === 'mega' || size === 'giga'
+                      ? '20px'
+                      : size === 'kilo'
+                        ? '13px'
+                        : size === 'nano' || size === 'micro'
+                          ? '10px'
+                          : '11px',
                   paddingTop: size === 'mega' || size === 'giga' ? '19px' : undefined,
-                  paddingBottom: footer ? (size === 'kilo' || size === 'hecto' || size === 'deca' ? '17px' : '10px') : undefined,
+                  paddingBottom: footer
+                    ? size === 'kilo' || size === 'hecto' || size === 'deca'
+                      ? '17px'
+                      : '10px'
+                    : undefined,
                 })}
             />
           </div>
@@ -84,7 +102,7 @@ const LfBubble = React.forwardRef<HTMLDivElement, LfBubbleProps>(
         {/* Footer */}
         {footer && (
           <div
-            className="flex-none"
+            className="flex flex-none flex-col"
             style={styles?.footer?.backgroundColor ? { backgroundColor: styles.footer.backgroundColor } : undefined}
           >
             <LfBox
