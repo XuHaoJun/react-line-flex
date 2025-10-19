@@ -62,22 +62,23 @@ const LfImage = React.forwardRef<HTMLDivElement, LfImageProps>(
     };
 
     // Calculate padding-bottom percentage for aspect ratio (like flex2html.js)
-    const aspectRatioMap: Record<string, number> = {
-      '1:1': 100,
-      '1.51:1': 66.22517,
-      '1.91:1': 52.35602,
-      '20:13': 65,
-      '4:3': 75,
-      '16:9': 56.25,
-      '2:1': 50,
-      '3:1': 33.33333,
-      '3:4': 133.33333,
-      '9:16': 177.77778,
-      '1:2': 200,
-      '1:3': 300,
+    // Dynamically calculate from aspectRatio string (e.g., '2:3' -> 3*100/2 = 150%)
+    const calculateAspectRatio = (ratio: string | undefined): number => {
+      if (!ratio) return 100;
+      
+      const parts = ratio.split(':');
+      if (parts.length === 2 && parts[0] && parts[1]) {
+        const width = parseFloat(parts[0]);
+        const height = parseFloat(parts[1]);
+        if (!isNaN(width) && !isNaN(height) && width > 0) {
+          return (height * 100) / width;
+        }
+      }
+      
+      return 100;
     };
 
-    const paddingBottom = aspectRatio ? aspectRatioMap[aspectRatio] || 100 : 100;
+    const paddingBottom = calculateAspectRatio(aspectRatio);
 
     const sizeClass =
       typeof size === 'string' && !size.includes('px') && !size.includes('%') ? imageSizeMap[size] || 'w-[100px]' : '';
