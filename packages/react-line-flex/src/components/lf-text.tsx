@@ -6,8 +6,8 @@ import { LfSpan } from './lf-span';
 import {
   getSizeClass,
   getSizeStyle,
-  getMarginClass,
-  getMarginStyle,
+  getTextMarginClass,
+  getTextMarginStyle,
   getOffsetStyles,
   getFlexClass,
   getFlexStyle,
@@ -58,8 +58,8 @@ const LfText = React.forwardRef<HTMLDivElement, LfTextProps>(
   ) => {
     const sizeClass = getSizeClass(size);
     const sizeStyle = getSizeStyle(size);
-    const marginClass = getMarginClass(margin);
-    const marginStyle = getMarginStyle(margin);
+    const marginClass = getTextMarginClass(margin);
+    const marginStyle = getTextMarginStyle(margin);
     const offsetStyles = getOffsetStyles(offsetTop, offsetBottom, offsetStart, offsetEnd);
     const flexClass = getFlexClass(flex);
     const flexStyle = getFlexStyle(flex);

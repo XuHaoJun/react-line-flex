@@ -29,6 +29,34 @@ export function getMarginStyle(margin?: FlexMargin | string): React.CSSPropertie
 }
 
 /**
+ * Convert margin to left margin CSS class or inline style (for text elements)
+ */
+export function getTextMarginClass(margin?: FlexMargin | string): string {
+  if (!margin) return '';
+
+  if (margin.includes('px') || margin.includes('%')) {
+    return ''; // Will be handled as inline style
+  }
+
+  const marginMap: Record<string, string> = {
+    none: 'ml-0',
+    xs: 'ml-[2px]',
+    sm: 'ml-[4px]',
+    md: 'ml-[8px]',
+    lg: 'ml-[12px]',
+    xl: 'ml-[16px]',
+    xxl: 'ml-[20px]',
+  };
+
+  return marginMap[margin] || '';
+}
+
+export function getTextMarginStyle(margin?: FlexMargin | string): React.CSSProperties {
+  if (!margin || (!margin.includes('px') && !margin.includes('%'))) return {};
+  return { marginLeft: margin };
+}
+
+/**
  * Convert spacing to CSS class or inline style
  */
 export function getSpacingClass(spacing?: FlexSpacing | string): string {
