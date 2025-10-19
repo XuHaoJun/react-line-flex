@@ -88,7 +88,7 @@ const LfText = React.forwardRef<HTMLDivElement, LfTextProps>(
     const clickHandler = handleAction(action, onAction);
 
     // Convert newlines to <br> tags
-    const textContent = text.replace(/\n/g, '<br>');
+    const textContent = (text || '').replace(/\n/g, '<br>');
 
     const content = (
       <>
