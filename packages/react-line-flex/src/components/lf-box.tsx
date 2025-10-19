@@ -1,5 +1,14 @@
 import * as React from 'react';
-import { cn } from '../lib/utils';
+
+// Import component renderers
+import { LfButton } from '@/components/lf-button';
+import { LfFiller } from '@/components/lf-filler';
+import { LfIcon } from '@/components/lf-icon';
+import { LfImage } from '@/components/lf-image';
+import { LfSeparator } from '@/components/lf-separator';
+import { LfSpacer } from '@/components/lf-spacer';
+import { LfText } from '@/components/lf-text';
+import { LfVideo } from '@/components/lf-video';
 import {
   getMarginClass,
   getMarginStyle,
@@ -15,64 +24,50 @@ import {
   getBorderWidthStyle,
   getBackgroundGradientStyle,
   handleAction,
-} from '../helpers';
-import {
-  layoutVariants,
-  positionVariants,
-  justifyContentVariants,
-  alignItemsVariants,
-} from '../variants';
-import type { FlexBox, FlexComponent, FlexAction } from '../types';
+} from '@/lib/lf-helpers';
+import type { FlexBox, FlexComponent, FlexAction } from '@/lib/lf-types';
+import { layoutVariants, positionVariants, justifyContentVariants, alignItemsVariants } from '@/lib/lf-variants';
+import { cn } from '@/lib/utils';
 
-// Import component renderers
-import { Button } from './button';
-import { Filler } from './filler';
-import { Icon } from './icon';
-import { Image } from './image';
-import { Separator } from './separator';
-import { Spacer } from './spacer';
-import { Text } from './text';
-import { Video } from './video';
-
-export type BoxProps = FlexBox & {
+export type LfBoxProps = FlexBox & {
   className?: string;
   onAction?: (action: FlexAction) => void;
 };
 
 // Component renderer function
-export function renderFlexComponent(
+export function renderLfFlexComponent(
   component: FlexComponent,
   index: number,
   layout?: 'horizontal' | 'vertical' | 'baseline',
-  onAction?: (action: FlexAction) => void
+  onAction?: (action: FlexAction) => void,
 ): React.ReactNode {
   const key = `${component.type}-${index}`;
 
   switch (component.type) {
     case 'box':
-      return <Box key={key} {...component} onAction={onAction} />;
+      return <LfBox key={key} {...component} onAction={onAction} />;
     case 'button':
-      return <Button key={key} {...component} onAction={onAction} />;
+      return <LfButton key={key} {...component} onAction={onAction} />;
     case 'filler':
-      return <Filler key={key} {...component} />;
+      return <LfFiller key={key} {...component} />;
     case 'icon':
-      return <Icon key={key} {...component} />;
+      return <LfIcon key={key} {...component} />;
     case 'image':
-      return <Image key={key} {...component} onAction={onAction} />;
+      return <LfImage key={key} {...component} onAction={onAction} />;
     case 'separator':
-      return <Separator key={key} {...component} layout={layout} />;
+      return <LfSeparator key={key} {...component} layout={layout} />;
     case 'spacer':
-      return <Spacer key={key} {...component} />;
+      return <LfSpacer key={key} {...component} />;
     case 'text':
-      return <Text key={key} {...component} onAction={onAction} />;
+      return <LfText key={key} {...component} onAction={onAction} />;
     case 'video':
-      return <Video key={key} {...component} />;
+      return <LfVideo key={key} {...component} />;
     default:
       return null;
   }
 }
 
-const Box = React.forwardRef<HTMLDivElement, BoxProps>(
+const LfBox = React.forwardRef<HTMLDivElement, LfBoxProps>(
   (
     {
       layout = 'vertical',
@@ -105,20 +100,14 @@ const Box = React.forwardRef<HTMLDivElement, BoxProps>(
       onAction,
       className,
     },
-    ref
+    ref,
   ) => {
     const marginClass = getMarginClass(margin);
     const marginStyle = getMarginStyle(margin);
     const spacingClass = getSpacingClass(spacing);
     const spacingStyle = getSpacingStyle(spacing);
     const offsetStyles = getOffsetStyles(offsetTop, offsetBottom, offsetStart, offsetEnd);
-    const paddingStyles = getPaddingStyles(
-      paddingAll,
-      paddingTop,
-      paddingBottom,
-      paddingStart,
-      paddingEnd
-    );
+    const paddingStyles = getPaddingStyles(paddingAll, paddingTop, paddingBottom, paddingStart, paddingEnd);
     const flexClass = getFlexClass(flex);
     const flexStyle = getFlexStyle(flex);
     const cornerRadiusClass = getCornerRadiusClass(cornerRadius);
@@ -150,7 +139,7 @@ const Box = React.forwardRef<HTMLDivElement, BoxProps>(
       <div
         ref={ref}
         className={cn(
-          'overflow-hidden relative min-w-0 max-w-full',
+          'relative max-w-full min-w-0 overflow-hidden',
           layoutVariants({ layout }),
           flexClass,
           spacingClass,
@@ -162,20 +151,19 @@ const Box = React.forwardRef<HTMLDivElement, BoxProps>(
           justifyContent && justifyContentVariants({ justifyContent }),
           alignItems && alignItemsVariants({ alignItems }),
           action && 'cursor-pointer',
-          className
+          className,
         )}
         style={containerStyle}
         onClick={clickHandler}
       >
         {contents.map((component: FlexComponent, index: number) =>
-          renderFlexComponent(component, index, layout, onAction)
+          renderLfFlexComponent(component, index, layout, onAction),
         )}
       </div>
     );
-  }
+  },
 );
 
-Box.displayName = 'Box';
+LfBox.displayName = 'LfBox';
 
-export { Box };
-
+export { LfBox };

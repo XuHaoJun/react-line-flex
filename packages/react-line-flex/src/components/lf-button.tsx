@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { cn } from '../lib/utils';
+
 import {
   getMarginClass,
   getMarginStyle,
@@ -7,16 +7,17 @@ import {
   getFlexClass,
   getFlexStyle,
   handleAction,
-} from '../helpers';
-import { positionVariants, gravityVariants, buttonStyleVariants } from '../variants';
-import type { FlexButton, FlexAction } from '../types';
+} from '@/lib/lf-helpers';
+import type { FlexButton, FlexAction } from '@/lib/lf-types';
+import { positionVariants, gravityVariants, buttonStyleVariants } from '@/lib/lf-variants';
+import { cn } from '@/lib/utils';
 
-export type ButtonProps = FlexButton & {
+export type LfButtonProps = FlexButton & {
   className?: string;
   onAction?: (action: FlexAction) => void;
 };
 
-const Button = React.forwardRef<HTMLDivElement, ButtonProps>(
+const LfButton = React.forwardRef<HTMLDivElement, LfButtonProps>(
   (
     {
       action,
@@ -35,7 +36,7 @@ const Button = React.forwardRef<HTMLDivElement, ButtonProps>(
       onAction,
       className,
     },
-    ref
+    ref,
   ) => {
     const marginClass = getMarginClass(margin);
     const marginStyle = getMarginStyle(margin);
@@ -64,7 +65,7 @@ const Button = React.forwardRef<HTMLDivElement, ButtonProps>(
           marginClass,
           position && positionVariants({ position }),
           gravity && gravityVariants({ gravity }),
-          className
+          className,
         )}
         style={containerStyle}
       >
@@ -73,38 +74,27 @@ const Button = React.forwardRef<HTMLDivElement, ButtonProps>(
             href={action.uri}
             target="_blank"
             rel="noopener noreferrer"
-            className={cn(
-              buttonStyleVariants({ buttonStyle: style, height }),
-              'w-full'
-            )}
+            className={cn(buttonStyleVariants({ buttonStyle: style, height }), 'w-full')}
             style={buttonStyle}
             onClick={clickHandler}
           >
-            <div className="whitespace-nowrap text-ellipsis overflow-hidden max-w-full">
-              {action.label || 'Button'}
-            </div>
+            <div className="max-w-full overflow-hidden text-ellipsis whitespace-nowrap">{action.label || 'Button'}</div>
           </a>
         ) : (
           <button
             type="button"
-            className={cn(
-              buttonStyleVariants({ buttonStyle: style, height }),
-              'w-full'
-            )}
+            className={cn(buttonStyleVariants({ buttonStyle: style, height }), 'w-full')}
             style={buttonStyle}
             onClick={clickHandler}
           >
-            <div className="whitespace-nowrap text-ellipsis overflow-hidden max-w-full">
-              {action.label || 'Button'}
-            </div>
+            <div className="max-w-full overflow-hidden text-ellipsis whitespace-nowrap">{action.label || 'Button'}</div>
           </button>
         )}
       </div>
     );
-  }
+  },
 );
 
-Button.displayName = 'Button';
+LfButton.displayName = 'LfButton';
 
-export { Button };
-
+export { LfButton };

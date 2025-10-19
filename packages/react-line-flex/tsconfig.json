@@ -5,7 +5,7 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "paths": {
-      "@workspace/ui/*": ["./src/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["."],

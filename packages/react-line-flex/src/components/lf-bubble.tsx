@@ -1,31 +1,18 @@
 import * as React from 'react';
-import { cn } from '../lib/utils';
-import { handleAction } from '../helpers';
-import { bubbleSizeVariants } from '../variants';
-import { Box, renderFlexComponent } from './box';
-import type { FlexBubble, FlexAction } from '../types';
 
-export interface BubbleProps extends FlexBubble {
+import { LfBox, renderLfFlexComponent } from '@/components/lf-box';
+import { handleAction } from '@/lib/lf-helpers';
+import type { FlexBubble, FlexAction } from '@/lib/lf-types';
+import { bubbleSizeVariants } from '@/lib/lf-variants';
+import { cn } from '@/lib/utils';
+
+export interface LfBubbleProps extends FlexBubble {
   className?: string;
   onAction?: (action: FlexAction) => void;
 }
 
-const Bubble = React.forwardRef<HTMLDivElement, BubbleProps>(
-  (
-    {
-      size = 'mega',
-      direction = 'ltr',
-      header,
-      hero,
-      body,
-      footer,
-      styles,
-      action,
-      onAction,
-      className,
-    },
-    ref
-  ) => {
+const LfBubble = React.forwardRef<HTMLDivElement, LfBubbleProps>(
+  ({ size = 'mega', direction = 'ltr', header, hero, body, footer, styles, action, onAction, className }, ref) => {
     const clickHandler = handleAction(action, onAction);
 
     const directionClass = direction === 'rtl' ? 'dir-rtl' : 'dir-ltr';
@@ -70,18 +57,13 @@ const Bubble = React.forwardRef<HTMLDivElement, BubbleProps>(
         },
       };
 
-      return sizeMap[size]?.[section] || sizeMap.mega[section];
+      return sizeMap[size]?.[section] || sizeMap.mega?.[section];
     };
 
     return (
       <div
         ref={ref}
-        className={cn(
-          bubbleSizeVariants({ size }),
-          directionClass,
-          action && 'cursor-pointer',
-          className
-        )}
+        className={cn(bubbleSizeVariants({ size }), directionClass, action && 'cursor-pointer', className)}
         onClick={action && !onAction ? clickHandler : undefined}
         dir={direction}
       >
@@ -91,7 +73,7 @@ const Bubble = React.forwardRef<HTMLDivElement, BubbleProps>(
             className={cn('flex-none', getPadding('header'))}
             style={styles?.header?.backgroundColor ? { backgroundColor: styles.header.backgroundColor } : undefined}
           >
-            <Box {...header} onAction={onAction} />
+            <LfBox {...header} onAction={onAction} />
           </div>
         )}
 
@@ -102,9 +84,9 @@ const Bubble = React.forwardRef<HTMLDivElement, BubbleProps>(
             style={styles?.hero?.backgroundColor ? { backgroundColor: styles.hero.backgroundColor } : undefined}
           >
             {hero.type === 'box' ? (
-              <Box {...hero} onAction={onAction} />
+              <LfBox {...hero} onAction={onAction} />
             ) : (
-              renderFlexComponent(hero, 0, undefined, onAction)
+              renderLfFlexComponent(hero, 0, undefined, onAction)
             )}
           </div>
         )}
@@ -112,14 +94,10 @@ const Bubble = React.forwardRef<HTMLDivElement, BubbleProps>(
         {/* Body */}
         {body && (
           <div
-            className={cn(
-              'flex-1 flex-col',
-              getPadding('body'),
-              footer && 'pb-[10px]'
-            )}
+            className={cn('flex-1 flex-col', getPadding('body'), footer && 'pb-[10px]')}
             style={styles?.body?.backgroundColor ? { backgroundColor: styles.body.backgroundColor } : undefined}
           >
-            <Box {...body} onAction={onAction} />
+            <LfBox {...body} onAction={onAction} />
           </div>
         )}
 
@@ -129,15 +107,14 @@ const Bubble = React.forwardRef<HTMLDivElement, BubbleProps>(
             className={cn('flex-none', getPadding('footer'))}
             style={styles?.footer?.backgroundColor ? { backgroundColor: styles.footer.backgroundColor } : undefined}
           >
-            <Box {...footer} onAction={onAction} />
+            <LfBox {...footer} onAction={onAction} />
           </div>
         )}
       </div>
     );
-  }
+  },
 );
 
-Bubble.displayName = 'Bubble';
+LfBubble.displayName = 'LfBubble';
 
-export { Bubble };
-
+export { LfBubble };

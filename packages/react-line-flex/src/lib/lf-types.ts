@@ -9,11 +9,29 @@ export type FlexDecoration = 'none' | 'underline' | 'line-through';
 export type FlexWeight = 'regular' | 'bold';
 export type FlexStyle = 'normal' | 'italic';
 export type FlexPosition = 'relative' | 'absolute';
-export type FlexAspectRatio = '1:1' | '1.51:1' | '1.91:1' | '4:3' | '16:9' | '20:13' | '2:1' | '3:1' | '3:4' | '9:16' | '1:2' | '1:3';
+export type FlexAspectRatio =
+  | '1:1'
+  | '1.51:1'
+  | '1.91:1'
+  | '4:3'
+  | '16:9'
+  | '20:13'
+  | '2:1'
+  | '3:1'
+  | '3:4'
+  | '9:16'
+  | '1:2'
+  | '1:3';
 export type FlexAspectMode = 'cover' | 'fit';
 export type FlexLayout = 'horizontal' | 'vertical' | 'baseline';
 export type FlexDirection = 'ltr' | 'rtl';
-export type FlexJustifyContent = 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly';
+export type FlexJustifyContent =
+  | 'flex-start'
+  | 'flex-end'
+  | 'center'
+  | 'space-between'
+  | 'space-around'
+  | 'space-evenly';
 export type FlexAlignItems = 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 export type FlexBubbleSize = 'nano' | 'micro' | 'deca' | 'hecto' | 'kilo' | 'mega' | 'giga';
 export type FlexButtonStyle = 'link' | 'primary' | 'secondary';
@@ -240,4 +258,3 @@ export interface FlexMessage {
   altText: string;
   contents: FlexBubble | FlexCarousel;
 }
-

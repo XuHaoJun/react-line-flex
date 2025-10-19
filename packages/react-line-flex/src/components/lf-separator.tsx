@@ -1,14 +1,15 @@
 import * as React from 'react';
-import { cn } from '../lib/utils';
-import { getMarginClass, getMarginStyle } from '../helpers';
-import type { FlexSeparator } from '../types';
 
-export interface SeparatorProps extends FlexSeparator {
+import { getMarginClass, getMarginStyle } from '@/lib/lf-helpers';
+import type { FlexSeparator } from '@/lib/lf-types';
+import { cn } from '@/lib/utils';
+
+export interface LfSeparatorProps extends FlexSeparator {
   className?: string;
   layout?: 'horizontal' | 'vertical' | 'baseline';
 }
 
-const Separator = React.forwardRef<HTMLDivElement, SeparatorProps>(
+const LfSeparator = React.forwardRef<HTMLDivElement, LfSeparatorProps>(
   ({ margin, color, className, layout = 'vertical' }, ref) => {
     const marginClass = getMarginClass(margin);
     const marginStyle = getMarginStyle(margin);
@@ -25,17 +26,16 @@ const Separator = React.forwardRef<HTMLDivElement, SeparatorProps>(
         ref={ref}
         className={cn(
           'flex-none',
-          !isHorizontal ? 'w-full h-px border-t border-[#d4d6da]' : 'h-full w-px border-l border-[#d4d6da]',
+          !isHorizontal ? 'h-px w-full border-t border-[#d4d6da]' : 'h-full w-px border-l border-[#d4d6da]',
           marginClass,
-          className
+          className,
         )}
         style={style}
       />
     );
-  }
+  },
 );
 
-Separator.displayName = 'Separator';
+LfSeparator.displayName = 'LfSeparator';
 
-export { Separator };
-
+export { LfSeparator };

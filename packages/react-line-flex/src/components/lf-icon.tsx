@@ -1,34 +1,18 @@
 import * as React from 'react';
-import { cn } from '../lib/utils';
-import {
-  getSizeClass,
-  getSizeStyle,
-  getMarginClass,
-  getMarginStyle,
-  getOffsetStyles,
-} from '../helpers';
-import { positionVariants } from '../variants';
-import type { FlexIcon } from '../types';
 
-export type IconProps = FlexIcon & {
+import { getSizeClass, getSizeStyle, getMarginClass, getMarginStyle, getOffsetStyles } from '@/lib/lf-helpers';
+import type { FlexIcon } from '@/lib/lf-types';
+import { positionVariants } from '@/lib/lf-variants';
+import { cn } from '@/lib/utils';
+
+export type LfIconProps = FlexIcon & {
   className?: string;
 };
 
-const Icon = React.forwardRef<HTMLDivElement, IconProps>(
+const LfIcon = React.forwardRef<HTMLDivElement, LfIconProps>(
   (
-    {
-      url,
-      size = 'md',
-      aspectRatio,
-      margin,
-      position,
-      offsetTop,
-      offsetBottom,
-      offsetStart,
-      offsetEnd,
-      className,
-    },
-    ref
+    { url, size = 'md', aspectRatio, margin, position, offsetTop, offsetBottom, offsetStart, offsetEnd, className },
+    ref,
   ) => {
     const sizeClass = getSizeClass(size);
     const sizeStyle = getSizeStyle(size);
@@ -62,24 +46,23 @@ const Icon = React.forwardRef<HTMLDivElement, IconProps>(
       <div
         ref={ref}
         className={cn(
-          'flex-none relative',
+          'relative flex-none',
           sizeClass,
           marginClass,
           position && positionVariants({ position }),
-          className
+          className,
         )}
         style={style}
       >
         <span
-          className="inline-block overflow-hidden bg-center bg-no-repeat bg-contain align-baseline"
+          className="inline-block overflow-hidden bg-contain bg-center bg-no-repeat align-baseline"
           style={iconStyle}
         />
       </div>
     );
-  }
+  },
 );
 
-Icon.displayName = 'Icon';
+LfIcon.displayName = 'LfIcon';
 
-export { Icon };
-
+export { LfIcon };

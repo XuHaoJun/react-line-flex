@@ -214,7 +214,7 @@ export const buttonStyleVariants = cva(
       buttonStyle: 'link',
       height: 'md',
     },
-  }
+  },
 );
 
 // Bubble size variants
@@ -275,4 +275,3 @@ export const alignItemsVariants = cva('', {
     },
   },
 });
-

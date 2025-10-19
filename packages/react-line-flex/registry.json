@@ -10,35 +10,35 @@
       "description": "A React component library for rendering LINE Flex Messages with Tailwind CSS",
       "files": [
         {
-          "path": "src/components/box.tsx",
+          "path": "src/components/lf-box.tsx",
           "type": "registry:component"
         },
         {
-          "path": "src/components/bubble.tsx",
+          "path": "src/components/lf-bubble.tsx",
           "type": "registry:component"
         },
         {
-          "path": "src/components/button.tsx",
+          "path": "src/components/lf-button.tsx",
           "type": "registry:component"
         },
         {
-          "path": "src/components/carousel.tsx",
+          "path": "src/components/lf-carousel.tsx",
           "type": "registry:component"
         },
         {
-          "path": "src/components/container.tsx",
+          "path": "src/components/lf-container.tsx",
           "type": "registry:component"
         },
         {
-          "path": "src/components/filler.tsx",
+          "path": "src/components/lf-filler.tsx",
           "type": "registry:component"
         },
         {
-          "path": "src/components/icon.tsx",
+          "path": "src/components/lf-icon.tsx",
           "type": "registry:component"
         },
         {
-          "path": "src/components/image.tsx",
+          "path": "src/components/lf-image.tsx",
           "type": "registry:component"
         },
         {
@@ -46,27 +46,27 @@
           "type": "registry:component"
         },
         {
-          "path": "src/components/separator.tsx",
+          "path": "src/components/lf-separator.tsx",
           "type": "registry:component"
         },
         {
-          "path": "src/components/spacer.tsx",
+          "path": "src/components/lf-spacer.tsx",
           "type": "registry:component"
         },
         {
-          "path": "src/components/span.tsx",
+          "path": "src/components/lf-span.tsx",
           "type": "registry:component"
         },
         {
-          "path": "src/components/text.tsx",
+          "path": "src/components/lf-text.tsx",
           "type": "registry:component"
         },
         {
-          "path": "src/components/video.tsx",
+          "path": "src/components/lf-video.tsx",
           "type": "registry:component"
         },
         {
-          "path": "src/helpers.ts",
+          "path": "src/lib/lf-helpers.ts",
           "type": "registry:lib"
         },
         {
@@ -74,11 +74,11 @@
           "type": "registry:lib"
         },
         {
-          "path": "src/types.ts",
+          "path": "src/lib/lf-types.ts",
           "type": "registry:lib"
         },
         {
-          "path": "src/variants.ts",
+          "path": "src/lib/lf-variants.ts",
           "type": "registry:lib"
         },
         {

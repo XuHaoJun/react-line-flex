@@ -1,14 +1,15 @@
 import * as React from 'react';
-import { cn } from '../lib/utils';
-import { getSizeClass, getSizeStyle } from '../helpers';
-import { weightVariants, styleVariants, decorationVariants } from '../variants';
-import type { FlexSpan } from '../types';
 
-export interface SpanProps extends FlexSpan {
+import { getSizeClass, getSizeStyle } from '@/lib/lf-helpers';
+import type { FlexSpan } from '@/lib/lf-types';
+import { weightVariants, styleVariants, decorationVariants } from '@/lib/lf-variants';
+import { cn } from '@/lib/utils';
+
+export interface LfSpanProps extends FlexSpan {
   className?: string;
 }
 
-const Span = React.forwardRef<HTMLSpanElement, SpanProps>(
+const LfSpan = React.forwardRef<HTMLSpanElement, LfSpanProps>(
   ({ text, size, color, weight, style, decoration, className }, ref) => {
     const sizeClass = getSizeClass(size);
     const sizeStyle = getSizeStyle(size);
@@ -27,17 +28,16 @@ const Span = React.forwardRef<HTMLSpanElement, SpanProps>(
           weight && weightVariants({ weight }),
           style && styleVariants({ style }),
           decoration && decorationVariants({ decoration }),
-          className
+          className,
         )}
         style={inlineStyle}
       >
         {text}
       </span>
     );
-  }
+  },
 );
 
-Span.displayName = 'Span';
+LfSpan.displayName = 'LfSpan';
 
-export { Span };
-
+export { LfSpan };

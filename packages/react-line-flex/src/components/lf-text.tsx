@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { cn } from '../lib/utils';
+
+import { LfSpan } from '@/components/lf-span';
 import {
   getSizeClass,
   getSizeStyle,
@@ -9,7 +10,8 @@ import {
   getFlexClass,
   getFlexStyle,
   handleAction,
-} from '../helpers';
+} from '@/lib/lf-helpers';
+import type { FlexText, FlexSpan, FlexAction } from '@/lib/lf-types';
 import {
   positionVariants,
   weightVariants,
@@ -17,16 +19,15 @@ import {
   decorationVariants,
   alignVariants,
   gravityVariants,
-} from '../variants';
-import { Span } from './span';
-import type { FlexText, FlexSpan, FlexAction } from '../types';
+} from '@/lib/lf-variants';
+import { cn } from '@/lib/utils';
 
-export type TextProps = FlexText & {
+export type LfTextProps = FlexText & {
   className?: string;
   onAction?: (action: FlexAction) => void;
 };
 
-const Text = React.forwardRef<HTMLDivElement, TextProps>(
+const LfText = React.forwardRef<HTMLDivElement, LfTextProps>(
   (
     {
       text,
@@ -52,7 +53,7 @@ const Text = React.forwardRef<HTMLDivElement, TextProps>(
       onAction,
       className,
     },
-    ref
+    ref,
   ) => {
     const sizeClass = getSizeClass(size);
     const sizeStyle = getSizeStyle(size);
@@ -94,7 +95,7 @@ const Text = React.forwardRef<HTMLDivElement, TextProps>(
           <>
             <span dangerouslySetInnerHTML={{ __html: textContent }} />
             {contents.map((span: FlexSpan, index: number) => (
-              <Span key={index} {...span} />
+              <LfSpan key={index} {...span} />
             ))}
           </>
         ) : (
@@ -103,29 +104,30 @@ const Text = React.forwardRef<HTMLDivElement, TextProps>(
       </>
     );
 
-    const textElement = action?.type === 'uri' ? (
-      <a
-        href={action.uri}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-inherit no-underline hover:underline"
-        style={textStyle}
-        onClick={clickHandler}
-      >
-        {content}
-      </a>
-    ) : (
-      <p
-        className={cn(
-          !wrap && 'overflow-hidden text-ellipsis whitespace-nowrap',
-          wrap && 'break-words whitespace-normal'
-        )}
-        style={textStyle}
-        onClick={clickHandler}
-      >
-        {content}
-      </p>
-    );
+    const textElement =
+      action?.type === 'uri' ? (
+        <a
+          href={action.uri}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-inherit no-underline hover:underline"
+          style={textStyle}
+          onClick={clickHandler}
+        >
+          {content}
+        </a>
+      ) : (
+        <p
+          className={cn(
+            !wrap && 'overflow-hidden text-ellipsis whitespace-nowrap',
+            wrap && 'break-words whitespace-normal',
+          )}
+          style={textStyle}
+          onClick={clickHandler}
+        >
+          {content}
+        </p>
+      );
 
     return (
       <div
@@ -142,17 +144,16 @@ const Text = React.forwardRef<HTMLDivElement, TextProps>(
           align && alignVariants({ align }),
           gravity && gravityVariants({ gravity }),
           action && 'cursor-pointer',
-          className
+          className,
         )}
         style={containerStyle}
       >
         {textElement}
       </div>
     );
-  }
+  },
 );
 
-Text.displayName = 'Text';
+LfText.displayName = 'LfText';
 
-export { Text };
-
+export { LfText };

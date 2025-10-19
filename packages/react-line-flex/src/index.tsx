@@ -1,43 +1,43 @@
 // Main exports
-export { Container } from './components/container';
-export type { ContainerProps } from './components/container';
+export { LfContainer } from '@/components/lf-container';
+export type { LfContainerProps } from '@/components/lf-container';
 
-export { Bubble } from './components/bubble';
-export type { BubbleProps } from './components/bubble';
+export { LfBubble } from '@/components/lf-bubble';
+export type { LfBubbleProps } from '@/components/lf-bubble';
 
-export { Carousel } from './components/carousel';
-export type { CarouselProps } from './components/carousel';
+export { LfCarousel } from '@/components/lf-carousel';
+export type { LfCarouselProps } from '@/components/lf-carousel';
 
 // Component exports
-export { Box, renderFlexComponent } from './components/box';
-export type { BoxProps } from './components/box';
+export { LfBox, renderLfFlexComponent } from '@/components/lf-box';
+export type { LfBoxProps } from '@/components/lf-box';
 
-export { Button } from './components/button';
-export type { ButtonProps } from './components/button';
+export { LfButton } from '@/components/lf-button';
+export type { LfButtonProps } from '@/components/lf-button';
 
-export { Image } from './components/image';
-export type { ImageProps } from './components/image';
+export { LfImage } from '@/components/lf-image';
+export type { LfImageProps } from '@/components/lf-image';
 
-export { Video } from './components/video';
-export type { VideoProps } from './components/video';
+export { LfVideo } from '@/components/lf-video';
+export type { LfVideoProps } from '@/components/lf-video';
 
-export { Icon } from './components/icon';
-export type { IconProps } from './components/icon';
+export { LfIcon } from '@/components/lf-icon';
+export type { LfIconProps } from '@/components/lf-icon';
 
-export { Text } from './components/text';
-export type { TextProps } from './components/text';
+export { LfText } from '@/components/lf-text';
+export type { LfTextProps } from '@/components/lf-text';
 
-export { Span } from './components/span';
-export type { SpanProps } from './components/span';
+export { LfSpan } from '@/components/lf-span';
+export type { LfSpanProps } from '@/components/lf-span';
 
-export { Separator } from './components/separator';
-export type { SeparatorProps } from './components/separator';
+export { LfSeparator } from '@/components/lf-separator';
+export type { LfSeparatorProps } from '@/components/lf-separator';
 
-export { Filler } from './components/filler';
-export type { FillerProps } from './components/filler';
+export { LfFiller } from '@/components/lf-filler';
+export type { LfFillerProps } from '@/components/lf-filler';
 
-export { Spacer } from './components/spacer';
-export type { SpacerProps } from './components/spacer';
+export { LfSpacer } from '@/components/lf-spacer';
+export type { LfSpacerProps } from '@/components/lf-spacer';
 
 // Type exports
 export type {
@@ -80,10 +80,10 @@ export type {
   FlexBorderWidth,
   FlexBackground,
   FlexBubbleStyles,
-} from './types';
+} from '@/lib/lf-types';
 
 // Utility exports
-export { cn } from './lib/utils';
+export { cn } from '@/lib/utils';
 
 // Helper exports
 export {
@@ -103,5 +103,4 @@ export {
   handleAction,
   getSizeClass,
   getSizeStyle,
-} from './helpers';
-
+} from '@/lib/lf-helpers';

@@ -1,15 +1,15 @@
-import type { FlexAction, FlexMargin, FlexSpacing } from './types';
+import type { FlexAction, FlexMargin, FlexSpacing } from './lf-types';
 
 /**
  * Convert margin/spacing to CSS class or inline style
  */
 export function getMarginClass(margin?: FlexMargin | string): string {
   if (!margin) return '';
-  
+
   if (margin.includes('px') || margin.includes('%')) {
     return ''; // Will be handled as inline style
   }
-  
+
   const marginMap: Record<string, string> = {
     none: 'mt-0',
     xs: 'mt-[2px]',
@@ -19,12 +19,12 @@ export function getMarginClass(margin?: FlexMargin | string): string {
     xl: 'mt-[16px]',
     xxl: 'mt-[20px]',
   };
-  
+
   return marginMap[margin] || '';
 }
 
 export function getMarginStyle(margin?: FlexMargin | string): React.CSSProperties {
-  if (!margin || !margin.includes('px') && !margin.includes('%')) return {};
+  if (!margin || (!margin.includes('px') && !margin.includes('%'))) return {};
   return { marginTop: margin };
 }
 
@@ -33,11 +33,11 @@ export function getMarginStyle(margin?: FlexMargin | string): React.CSSPropertie
  */
 export function getSpacingClass(spacing?: FlexSpacing | string): string {
   if (!spacing) return '';
-  
+
   if (spacing.includes('px') || spacing.includes('%')) {
     return '';
   }
-  
+
   const spacingMap: Record<string, string> = {
     none: 'gap-0',
     xs: 'gap-[2px]',
@@ -47,12 +47,12 @@ export function getSpacingClass(spacing?: FlexSpacing | string): string {
     xl: 'gap-[16px]',
     xxl: 'gap-[20px]',
   };
-  
+
   return spacingMap[spacing] || '';
 }
 
 export function getSpacingStyle(spacing?: FlexSpacing | string): React.CSSProperties {
-  if (!spacing || !spacing.includes('px') && !spacing.includes('%')) return {};
+  if (!spacing || (!spacing.includes('px') && !spacing.includes('%'))) return {};
   return { gap: spacing };
 }
 
@@ -80,15 +80,16 @@ export function getOffsetStyles(
   offsetTop?: string,
   offsetBottom?: string,
   offsetStart?: string,
-  offsetEnd?: string
+  offsetEnd?: string,
 ): React.CSSProperties {
   const styles: React.CSSProperties = {};
-  
+
   if (offsetTop) {
     styles.top = offsetTop.includes('px') || offsetTop.includes('%') ? offsetTop : getOffsetValue(offsetTop);
   }
   if (offsetBottom) {
-    styles.bottom = offsetBottom.includes('px') || offsetBottom.includes('%') ? offsetBottom : getOffsetValue(offsetBottom);
+    styles.bottom =
+      offsetBottom.includes('px') || offsetBottom.includes('%') ? offsetBottom : getOffsetValue(offsetBottom);
   }
   if (offsetStart) {
     styles.left = offsetStart.includes('px') || offsetStart.includes('%') ? offsetStart : getOffsetValue(offsetStart);
@@ -96,7 +97,7 @@ export function getOffsetStyles(
   if (offsetEnd) {
     styles.right = offsetEnd.includes('px') || offsetEnd.includes('%') ? offsetEnd : getOffsetValue(offsetEnd);
   }
-  
+
   return styles;
 }
 
@@ -121,26 +122,30 @@ export function getPaddingStyles(
   paddingTop?: string,
   paddingBottom?: string,
   paddingStart?: string,
-  paddingEnd?: string
+  paddingEnd?: string,
 ): React.CSSProperties {
   const styles: React.CSSProperties = {};
-  
+
   if (paddingAll) {
     styles.padding = paddingAll.includes('px') || paddingAll.includes('%') ? paddingAll : getPaddingValue(paddingAll);
   }
   if (paddingTop) {
-    styles.paddingTop = paddingTop.includes('px') || paddingTop.includes('%') ? paddingTop : getPaddingValue(paddingTop);
+    styles.paddingTop =
+      paddingTop.includes('px') || paddingTop.includes('%') ? paddingTop : getPaddingValue(paddingTop);
   }
   if (paddingBottom) {
-    styles.paddingBottom = paddingBottom.includes('px') || paddingBottom.includes('%') ? paddingBottom : getPaddingValue(paddingBottom);
+    styles.paddingBottom =
+      paddingBottom.includes('px') || paddingBottom.includes('%') ? paddingBottom : getPaddingValue(paddingBottom);
   }
   if (paddingStart) {
-    styles.paddingLeft = paddingStart.includes('px') || paddingStart.includes('%') ? paddingStart : getPaddingValue(paddingStart);
+    styles.paddingLeft =
+      paddingStart.includes('px') || paddingStart.includes('%') ? paddingStart : getPaddingValue(paddingStart);
   }
   if (paddingEnd) {
-    styles.paddingRight = paddingEnd.includes('px') || paddingEnd.includes('%') ? paddingEnd : getPaddingValue(paddingEnd);
+    styles.paddingRight =
+      paddingEnd.includes('px') || paddingEnd.includes('%') ? paddingEnd : getPaddingValue(paddingEnd);
   }
-  
+
   return styles;
 }
 
@@ -162,11 +167,11 @@ function getPaddingValue(padding: string): string {
  */
 export function getCornerRadiusClass(cornerRadius?: string): string {
   if (!cornerRadius) return '';
-  
+
   if (cornerRadius.includes('px')) {
     return '';
   }
-  
+
   const radiusMap: Record<string, string> = {
     none: 'rounded-none',
     xs: 'rounded-[2px]',
@@ -176,7 +181,7 @@ export function getCornerRadiusClass(cornerRadius?: string): string {
     xl: 'rounded-[16px]',
     xxl: 'rounded-[20px]',
   };
-  
+
   return radiusMap[cornerRadius] || '';
 }
 
@@ -190,11 +195,11 @@ export function getCornerRadiusStyle(cornerRadius?: string): React.CSSProperties
  */
 export function getBorderWidthClass(borderWidth?: string): string {
   if (!borderWidth) return '';
-  
+
   if (borderWidth.includes('px')) {
     return '';
   }
-  
+
   const borderMap: Record<string, string> = {
     none: 'border-0',
     light: 'border-[0.5px]',
@@ -203,7 +208,7 @@ export function getBorderWidthClass(borderWidth?: string): string {
     'semi-bold': 'border-[3px]',
     bold: 'border-4',
   };
-  
+
   return borderMap[borderWidth] || '';
 }
 
@@ -224,16 +229,16 @@ export function getBackgroundGradientStyle(background?: {
   centerPosition?: string;
 }): React.CSSProperties {
   if (!background || background.type !== 'linearGradient') return {};
-  
+
   const { angle, startColor, endColor, centerColor, centerPosition = '50%' } = background;
-  
+
   let gradient: string;
   if (centerColor) {
     gradient = `linear-gradient(${angle}, ${startColor} 0%, ${centerColor} ${centerPosition}, ${endColor} 100%)`;
   } else {
     gradient = `linear-gradient(${angle}, ${startColor} 0%, ${endColor} 100%)`;
   }
-  
+
   return { background: gradient };
 }
 
@@ -242,15 +247,15 @@ export function getBackgroundGradientStyle(background?: {
  */
 export function handleAction(action?: FlexAction, onAction?: (action: FlexAction) => void) {
   if (!action) return undefined;
-  
+
   return (e: React.MouseEvent) => {
     e.preventDefault();
-    
+
     if (onAction) {
       onAction(action);
       return;
     }
-    
+
     // Default handlers
     switch (action.type) {
       case 'uri':
@@ -271,11 +276,11 @@ export function handleAction(action?: FlexAction, onAction?: (action: FlexAction
  */
 export function getSizeClass(size?: string): string {
   if (!size) return '';
-  
+
   if (size.includes('px') || size.includes('%')) {
     return '';
   }
-  
+
   const sizeMap: Record<string, string> = {
     xxs: 'text-[11px]',
     xs: 'text-[13px]',
@@ -288,12 +293,11 @@ export function getSizeClass(size?: string): string {
     '4xl': 'text-[48px]',
     '5xl': 'text-[74px]',
   };
-  
+
   return sizeMap[size] || '';
 }
 
 export function getSizeStyle(size?: string): React.CSSProperties {
-  if (!size || !size.includes('px') && !size.includes('%')) return {};
+  if (!size || (!size.includes('px') && !size.includes('%'))) return {};
   return { fontSize: size };
 }
-

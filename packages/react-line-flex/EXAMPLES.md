@@ -459,22 +459,9 @@ import { Box, Text, Button, Image } from 'react-line-flex';
 function CustomComponent() {
   return (
     <Box layout="vertical" spacing="md" className="p-4">
-      <Image
-        url="https://example.com/banner.jpg"
-        size="full"
-        aspectRatio="16:9"
-        aspectMode="cover"
-      />
-      <Text
-        text="Custom Layout"
-        size="xl"
-        weight="bold"
-      />
-      <Text
-        text="Build your own layouts with individual components"
-        wrap={true}
-        color="#666666"
-      />
+      <Image url="https://example.com/banner.jpg" size="full" aspectRatio="16:9" aspectMode="cover" />
+      <Text text="Custom Layout" size="xl" weight="bold" />
+      <Text text="Build your own layouts with individual components" wrap={true} color="#666666" />
       <Button
         action={{
           type: 'uri',
@@ -507,12 +494,12 @@ function MessageWithActions() {
           window.open(action.uri, '_blank');
         }
         break;
-      
+
       case 'message':
         // Send message to chat
         sendMessageToChat(action.text);
         break;
-      
+
       case 'postback':
         // Handle postback data
         handlePostback(action.data);
@@ -520,12 +507,7 @@ function MessageWithActions() {
     }
   };
 
-  return (
-    <Container
-      content={flexMessage}
-      onAction={handleAction}
-    />
-  );
+  return <Container content={flexMessage} onAction={handleAction} />;
 }
 ```
 
@@ -539,7 +521,7 @@ import { Bubble, Box, Text } from 'react-line-flex';
 function StyledBubble() {
   return (
     <Bubble
-      className="shadow-xl hover:shadow-2xl transition-shadow"
+      className="shadow-xl transition-shadow hover:shadow-2xl"
       body={{
         type: 'box',
         layout: 'vertical',
@@ -555,4 +537,3 @@ function StyledBubble() {
   );
 }
 ```
-

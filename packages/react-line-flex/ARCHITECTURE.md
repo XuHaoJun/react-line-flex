@@ -66,11 +66,12 @@ This ensures type safety and compatibility with LINE's specification.
 - Fallback to inline styles for custom values (e.g., `"20px"`, `"#ff0000"`)
 
 Example:
+
 ```typescript
 // Predefined values → Tailwind classes
 margin: 'md' → 'mt-[8px]'
 
-// Custom values → inline styles  
+// Custom values → inline styles
 margin: '25px' → style={{ marginTop: '25px' }}
 ```
 
@@ -79,10 +80,7 @@ margin: '25px' → style={{ marginTop: '25px' }}
 Unified action handling across all components:
 
 ```typescript
-export function handleAction(
-  action?: FlexAction, 
-  onAction?: (action: FlexAction) => void
-) {
+export function handleAction(action?: FlexAction, onAction?: (action: FlexAction) => void) {
   // Custom handler or default behavior
 }
 ```
@@ -96,15 +94,13 @@ Actions are propagated from Container down through components.
 Main entry point. Determines whether to render Bubble or Carousel based on content type.
 
 ```tsx
-<Container
-  content={flexMessage.contents}
-  onAction={handleAction}
-/>
+<Container content={flexMessage.contents} onAction={handleAction} />
 ```
 
 ### Bubble
 
 Renders message sections (hero, header, body, footer) with size variants:
+
 - nano: 120px
 - micro: 160px
 - kilo: 260px
@@ -114,11 +110,13 @@ Renders message sections (hero, header, body, footer) with size variants:
 ### Box
 
 Recursive container supporting three layouts:
+
 - `horizontal`: row layout
 - `vertical`: column layout (default)
 - `baseline`: row with baseline alignment
 
 Key features:
+
 - Flex grow/shrink
 - Spacing between children
 - Padding, margin, border
@@ -128,6 +126,7 @@ Key features:
 ### Text
 
 Rich text component with:
+
 - Size variants (xxs → 5xl)
 - Weight (regular/bold)
 - Style (normal/italic)
@@ -140,6 +139,7 @@ Rich text component with:
 ### Image
 
 Responsive image with:
+
 - Predefined sizes (xxs → 5xl, full)
 - Aspect ratios (1:1, 16:9, 4:3, etc.)
 - Aspect modes (fit/cover)
@@ -148,6 +148,7 @@ Responsive image with:
 ### Button
 
 Interactive button with three styles:
+
 - `link`: Text-style button
 - `primary`: Green filled button
 - `secondary`: Gray filled button
@@ -157,29 +158,29 @@ Interactive button with three styles:
 ### Size Conversion
 
 ```typescript
-getSizeClass('xl') // → 'text-[22px]'
-getSizeStyle('24px') // → { fontSize: '24px' }
+getSizeClass('xl'); // → 'text-[22px]'
+getSizeStyle('24px'); // → { fontSize: '24px' }
 ```
 
 ### Margin/Spacing
 
 ```typescript
-getMarginClass('md') // → 'mt-[8px]'
-getSpacingClass('lg') // → 'gap-[12px]'
+getMarginClass('md'); // → 'mt-[8px]'
+getSpacingClass('lg'); // → 'gap-[12px]'
 ```
 
 ### Flex Values
 
 ```typescript
-getFlexClass(1) // → 'flex-1'
-getFlexClass(5) // → '' (uses inline style)
-getFlexStyle(5) // → { flexGrow: 5 }
+getFlexClass(1); // → 'flex-1'
+getFlexClass(5); // → '' (uses inline style)
+getFlexStyle(5); // → { flexGrow: 5 }
 ```
 
 ### Offsets
 
 ```typescript
-getOffsetStyles('10px', undefined, 'md', '20px')
+getOffsetStyles('10px', undefined, 'md', '20px');
 // → { top: '10px', left: '8px', right: '20px' }
 ```
 
@@ -188,22 +189,19 @@ getOffsetStyles('10px', undefined, 'md', '20px')
 Centralized variant definitions using class-variance-authority:
 
 ```typescript
-export const buttonStyleVariants = cva(
-  'inline-flex items-center justify-center...',
-  {
-    variants: {
-      buttonStyle: {
-        link: 'text-[#42659a]',
-        primary: 'bg-[#17c950] text-white',
-        secondary: 'bg-[#dcdfe5] text-[#111111]',
-      },
-      height: {
-        sm: 'h-[40px]',
-        md: 'h-[52px]',
-      },
+export const buttonStyleVariants = cva('inline-flex items-center justify-center...', {
+  variants: {
+    buttonStyle: {
+      link: 'text-[#42659a]',
+      primary: 'bg-[#17c950] text-white',
+      secondary: 'bg-[#dcdfe5] text-[#111111]',
     },
-  }
-);
+    height: {
+      sm: 'h-[40px]',
+      md: 'h-[52px]',
+    },
+  },
+});
 ```
 
 ## Recursive Rendering
@@ -244,6 +242,7 @@ The library uses Tailwind CSS v4 with custom utilities:
 ## TypeScript Configuration
 
 Key compiler options:
+
 - `moduleResolution: "bundler"` - For seamless imports
 - `strict: true` - Full type safety
 - `jsx: "react-jsx"` - Modern JSX transform
@@ -256,7 +255,7 @@ Key compiler options:
 import { Container } from 'react-line-flex';
 import 'react-line-flex/styles';
 
-<Container content={flexMessage} />
+<Container content={flexMessage} />;
 ```
 
 ### Custom Action Handling
@@ -278,7 +277,7 @@ import { Box, Text, Button } from 'react-line-flex';
 <Box layout="vertical" spacing="md">
   <Text text="Title" size="xl" weight="bold" />
   <Button action={{ type: 'uri', uri: '...', label: 'Click' }} />
-</Box>
+</Box>;
 ```
 
 ## Performance Considerations
@@ -295,10 +294,7 @@ import { Box, Text, Button } from 'react-line-flex';
 All components accept `className` prop:
 
 ```tsx
-<Container
-  content={message}
-  className="shadow-lg rounded-xl"
-/>
+<Container content={message} className="rounded-xl shadow-lg" />
 ```
 
 ### Custom Actions
@@ -332,6 +328,7 @@ Override default action behavior:
 ## Contributing
 
 When adding new features:
+
 1. Add types to `types.ts`
 2. Create/update components in `components/`
 3. Add CVA variants to `variants.ts`
@@ -345,4 +342,3 @@ When adding new features:
 - [LINE Flex Message Spec](https://developers.line.biz/en/docs/messaging-api/using-flex-messages/)
 - [Tailwind CSS v4](https://tailwindcss.com/)
 - [class-variance-authority](https://cva.style/)
-

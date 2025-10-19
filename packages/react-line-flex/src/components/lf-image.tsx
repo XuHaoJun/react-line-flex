@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { cn } from '../lib/utils';
+
 import {
   getMarginClass,
   getMarginStyle,
@@ -7,21 +7,17 @@ import {
   getFlexClass,
   getFlexStyle,
   handleAction,
-} from '../helpers';
-import {
-  positionVariants,
-  gravityVariants,
-  aspectRatioVariants,
-  aspectModeVariants,
-} from '../variants';
-import type { FlexImage, FlexAction } from '../types';
+} from '@/lib/lf-helpers';
+import type { FlexImage, FlexAction } from '@/lib/lf-types';
+import { positionVariants, gravityVariants, aspectRatioVariants, aspectModeVariants } from '@/lib/lf-variants';
+import { cn } from '@/lib/utils';
 
-export type ImageProps = FlexImage & {
+export type LfImageProps = FlexImage & {
   className?: string;
   onAction?: (action: FlexAction) => void;
 };
 
-const Image = React.forwardRef<HTMLDivElement, ImageProps>(
+const LfImage = React.forwardRef<HTMLDivElement, LfImageProps>(
   (
     {
       url,
@@ -42,7 +38,7 @@ const Image = React.forwardRef<HTMLDivElement, ImageProps>(
       onAction,
       className,
     },
-    ref
+    ref,
   ) => {
     const marginClass = getMarginClass(margin);
     const marginStyle = getMarginStyle(margin);
@@ -64,9 +60,8 @@ const Image = React.forwardRef<HTMLDivElement, ImageProps>(
       full: 'w-full',
     };
 
-    const sizeClass = typeof size === 'string' && !size.includes('px') && !size.includes('%')
-      ? imageSizeMap[size] || 'w-[100px]'
-      : '';
+    const sizeClass =
+      typeof size === 'string' && !size.includes('px') && !size.includes('%') ? imageSizeMap[size] || 'w-[100px]' : '';
 
     const containerStyle: React.CSSProperties = {
       ...marginStyle,
@@ -89,13 +84,13 @@ const Image = React.forwardRef<HTMLDivElement, ImageProps>(
       <div
         ref={ref}
         className={cn(
-          'flex items-center overflow-hidden relative min-w-0',
+          'relative flex min-w-0 items-center overflow-hidden',
           flexClass,
           marginClass,
           position && positionVariants({ position }),
           alignClass,
           gravityClass,
-          className
+          className,
         )}
         style={containerStyle}
       >
@@ -105,16 +100,13 @@ const Image = React.forwardRef<HTMLDivElement, ImageProps>(
               href={action.uri}
               target="_blank"
               rel="noopener noreferrer"
-              className={cn(
-                'block relative w-full',
-                aspectRatio && aspectRatioVariants({ aspectRatio })
-              )}
+              className={cn('relative block w-full', aspectRatio && aspectRatioVariants({ aspectRatio }))}
               onClick={clickHandler}
             >
               <span
                 className={cn(
-                  'block absolute inset-0 overflow-hidden bg-no-repeat bg-center',
-                  aspectMode && aspectModeVariants({ aspectMode })
+                  'absolute inset-0 block overflow-hidden bg-center bg-no-repeat',
+                  aspectMode && aspectModeVariants({ aspectMode }),
                 )}
                 style={imageStyle}
               />
@@ -122,16 +114,16 @@ const Image = React.forwardRef<HTMLDivElement, ImageProps>(
           ) : (
             <div
               className={cn(
-                'block relative w-full',
+                'relative block w-full',
                 aspectRatio && aspectRatioVariants({ aspectRatio }),
-                action && 'cursor-pointer'
+                action && 'cursor-pointer',
               )}
               onClick={clickHandler}
             >
               <span
                 className={cn(
-                  'block absolute inset-0 overflow-hidden bg-no-repeat bg-center',
-                  aspectMode && aspectModeVariants({ aspectMode })
+                  'absolute inset-0 block overflow-hidden bg-center bg-no-repeat',
+                  aspectMode && aspectModeVariants({ aspectMode }),
                 )}
                 style={imageStyle}
               />
@@ -140,10 +132,9 @@ const Image = React.forwardRef<HTMLDivElement, ImageProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
-Image.displayName = 'Image';
+LfImage.displayName = 'LfImage';
 
-export { Image };
-
+export { LfImage };
