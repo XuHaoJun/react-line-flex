@@ -61,7 +61,20 @@ jobs:
         run: pnpm install
 
       - name: Build with Turborepo
-        run: pnpm build --filter=web
+        run: cd apps/web && pnpm next build
+        env:
+          GITHUB_PAGES: true
+
+      - name: Verify build output
+        run: |
+          if [ ! -d "./apps/web/out" ]; then
+            echo "Error: Build output directory ./apps/web/out does not exist"
+            echo "Contents of ./apps/web:"
+            ls -la ./apps/web/ || true
+            exit 1
+          fi
+          echo "Build output exists:"
+          ls -la ./apps/web/out
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
