@@ -1,0 +1,92 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "react-line-flex",
+  "homepage": "https://xuhaojun.github.io/react-line-flex",
+  "items": [
+    {
+      "name": "react-line-flex",
+      "type": "registry:component",
+      "title": "React LINE Flex",
+      "description": "A React component library for rendering LINE Flex Messages with Tailwind CSS",
+      "files": [
+        {
+          "path": "src/components/box.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/bubble.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/button.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/carousel.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/container.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/filler.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/icon.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/image.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/index.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/separator.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/spacer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/span.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/text.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/video.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/helpers.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "src/types.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "src/variants.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "src/styles.css",
+          "type": "registry:lib"
+        }
+      ],
+      "npmPackageName": "react-line-flex"
+    }
+  ]
+}
