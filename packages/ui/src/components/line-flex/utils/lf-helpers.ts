@@ -86,9 +86,10 @@ export function getSpacingStyle(spacing?: FlexSpacing | string): React.CSSProper
 
 /**
  * Get flex class from flex number
+ * Note: When flex is undefined, we return empty string and let parent layout determine behavior via CSS
  */
 export function getFlexClass(flex?: number): string {
-  if (flex === undefined || flex < 0) return 'flex-1';
+  if (flex === undefined || flex < 0) return '';
   if (flex === 0) return 'flex-none';
   if (flex === 1) return 'flex-1';
   if (flex === 2) return 'flex-[2]';

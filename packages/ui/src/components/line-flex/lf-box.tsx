@@ -140,7 +140,7 @@ const LfBox = React.forwardRef<HTMLDivElement, LfBoxProps>(
       <div
         ref={ref}
         className={cn(
-          'relative max-w-full min-w-0 overflow-hidden',
+          'lf-box relative max-w-full min-w-0 overflow-hidden',
           layoutVariants({ layout }),
           flexClass,
           spacingClass,

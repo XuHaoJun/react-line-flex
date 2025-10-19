@@ -16,3 +16,54 @@
     -webkit-overflow-scrolling: touch;
   }
 }
+
+/* Flex box behavior matching flex2html - scoped to lf-box components only */
+@layer components {
+  /* Vertical box children default to flex: none */
+  .lf-box.flex-col > * {
+    flex: none;
+    flex-basis: auto;
+  }
+
+  /* Horizontal box children default to flex: 1 0 0 */
+  .lf-box.flex-row > * {
+    overflow: hidden;
+    flex: 1 0 0;
+  }
+
+  /* Baseline box children default to flex: 1 0 0 */
+  .lf-box.flex-row.items-baseline > * {
+    overflow: hidden;
+    flex: 1 0 0;
+  }
+
+  /* Explicit flex classes override defaults */
+  .lf-box > .flex-none {
+    flex: none !important;
+  }
+
+  .lf-box > .flex-1 {
+    flex: 1 0 0 !important;
+  }
+
+  .lf-box > .flex-\[2\] {
+    flex: 2 0 0 !important;
+  }
+
+  .lf-box > .flex-\[3\] {
+    flex: 3 0 0 !important;
+  }
+
+  /* Special handling for vertical boxes with explicit flex values */
+  .lf-box.flex-col > .flex-1 {
+    flex: 1 0 auto !important;
+  }
+
+  .lf-box.flex-col > .flex-\[2\] {
+    flex: 2 0 auto !important;
+  }
+
+  .lf-box.flex-col > .flex-\[3\] {
+    flex: 3 0 auto !important;
+  }
+}
