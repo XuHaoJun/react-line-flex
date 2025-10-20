@@ -133,22 +133,22 @@ const Example = () => {
       </section>
 
       {/* Examples Section */}
-      <section id="examples" className="container mx-auto px-4 py-16">
+      <section id="examples" className="mx-auto px-4 py-16">
         <h3 className="mb-8 text-center text-3xl font-bold">Component Examples</h3>
         <p className="text-muted-foreground mb-8 text-center">
           Explore {flexSamples.length} real-world examples of LINE Flex Messages rendered in React
         </p>
 
-        <div className="grid w-full gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+        <div className="grid w-full grid-cols-[repeat(auto-fit,500px)] justify-center gap-6">
           {flexSamples.map((sample, index) => (
-            <div key={index} className="flex flex-col gap-2">
+            <div key={index} className="flex w-[500px] flex-col gap-2">
               <div className="flex items-center justify-between">
                 <span className="text-muted-foreground text-xs font-medium">{sample.title}</span>
                 <span className="bg-primary/10 text-primary rounded-full px-2 py-0.5 text-xs font-medium">
                   {sample.content.contents.type}
                 </span>
               </div>
-              <div className="flex min-h-[800px] min-w-[500px] overflow-hidden rounded-lg border bg-[#849EBF] p-1 pt-[50px] pb-4 pl-5 shadow-sm transition-shadow hover:shadow-lg">
+              <div className="flex min-h-[800px] w-full overflow-hidden rounded-lg border bg-[#849EBF] p-1 pt-[50px] pb-4 pl-5 shadow-sm transition-shadow hover:shadow-lg">
                 <LfMessage className="h-full w-full" {...(sample.content as unknown as any)} onAction={handleAction} />
               </div>
             </div>
