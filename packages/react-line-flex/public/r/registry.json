@@ -100,7 +100,55 @@
           "target": "components/line-flex/utils/lf-variants.ts"
         }
       ],
-      "npmPackageName": "react-line-flex"
+      "css": {
+        "@layer utilities": {
+          ".scrollbar-hide::-webkit-scrollbar": {
+            "display": "none"
+          },
+          ".scrollbar-hide": {
+            "-ms-overflow-style": "none",
+            "scrollbar-width": "none"
+          },
+          ".-webkit-overflow-scrolling-touch": {
+            "-webkit-overflow-scrolling": "touch"
+          }
+        },
+        "@layer components": {
+          ".lf-box.flex-col > *": {
+            "flex": "none",
+            "flex-basis": "auto"
+          },
+          ".lf-box.flex-row > *": {
+            "overflow": "hidden",
+            "flex": "1 0 0"
+          },
+          ".lf-box.flex-row.items-baseline > *": {
+            "overflow": "hidden",
+            "flex": "1 0 0"
+          },
+          ".lf-box > .flex-none": {
+            "flex": "none !important"
+          },
+          ".lf-box > .flex-1": {
+            "flex": "1 0 0 !important"
+          },
+          ".lf-box > .flex-\\[2\\]": {
+            "flex": "2 0 0 !important"
+          },
+          ".lf-box > .flex-\\[3\\]": {
+            "flex": "3 0 0 !important"
+          },
+          ".lf-box.flex-col > .flex-1": {
+            "flex": "1 0 auto !important"
+          },
+          ".lf-box.flex-col > .flex-\\[2\\]": {
+            "flex": "2 0 auto !important"
+          },
+          ".lf-box.flex-col > .flex-\\[3\\]": {
+            "flex": "3 0 auto !important"
+          }
+        }
+      }
     }
   ]
 }
