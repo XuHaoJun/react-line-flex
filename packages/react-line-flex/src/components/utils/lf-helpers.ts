@@ -330,3 +330,39 @@ export function getSizeStyle(size?: string): React.CSSProperties {
   if (!size || (!size.includes('px') && !size.includes('%'))) return {};
   return { fontSize: size };
 }
+
+/**
+ * Compute per-child spacing className to emulate flex2html:
+ * - Vertical: .MdBx.vr.spcSm > div { margin-top: 4px; }
+ * - Horizontal/Baseline: margin-left equivalent
+ * Skips first child and filler/spacer components.
+ */
+export function getChildSpacingClass(
+  spacing: FlexSpacing | string | undefined,
+  layout: 'horizontal' | 'vertical' | 'baseline' | undefined,
+  childIndex: number,
+  componentType: string,
+): string {
+  if (!spacing || childIndex === 0) return '';
+  if (componentType === 'filler' || componentType === 'spacer') return '';
+
+  const tokenToPx: Record<string, string> = {
+    none: '0px',
+    xs: '2px',
+    sm: '4px',
+    md: '8px',
+    lg: '12px',
+    xl: '16px',
+    xxl: '20px',
+  };
+
+  const value =
+    typeof spacing === 'string' && (spacing.includes('px') || spacing.includes('%'))
+      ? spacing
+      : tokenToPx[String(spacing)] || '';
+
+  if (!value) return '';
+
+  const marginDir = layout === 'vertical' ? 'mt' : 'ml';
+  return `${marginDir}-[${value}]`;
+}

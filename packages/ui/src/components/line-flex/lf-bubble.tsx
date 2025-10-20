@@ -55,7 +55,7 @@ const LfBubble = React.forwardRef<HTMLDivElement, LfBubbleProps>(
         {/* Hero */}
         {hero && (
           <div
-            className="flex flex-none flex-col"
+            className="flex-none"
             style={styles?.hero?.backgroundColor ? { backgroundColor: styles.hero.backgroundColor } : undefined}
           >
             {hero.type === 'box' ? (

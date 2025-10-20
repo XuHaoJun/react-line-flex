@@ -14,8 +14,6 @@ import { LfVideo } from './lf-video';
 import {
   getMarginClass,
   getMarginStyle,
-  getSpacingClass,
-  getSpacingStyle,
   getOffsetStyles,
   getPaddingStyles,
   getFlexClass,
@@ -26,6 +24,7 @@ import {
   getBorderWidthStyle,
   getBackgroundGradientStyle,
   handleAction,
+  getChildSpacingClass,
 } from './utils/lf-helpers';
 import type { FlexBox, FlexComponent, FlexAction } from './utils/lf-types';
 import { layoutVariants, positionVariants, justifyContentVariants, alignItemsVariants } from './utils/lf-variants';
@@ -41,28 +40,31 @@ export function renderLfFlexComponent(
   index: number,
   layout?: 'horizontal' | 'vertical' | 'baseline',
   onAction?: (action: FlexAction) => void,
+  extraClassName?: string,
 ): React.ReactNode {
   const key = `${component.type}-${index}`;
 
   switch (component.type) {
     case 'box':
-      return <LfBox key={key} {...component} onAction={onAction} />;
+      return <LfBox key={key} {...component} onAction={onAction} className={extraClassName} />;
     case 'button':
-      return <LfButton key={key} {...component} onAction={onAction} />;
+      return <LfButton key={key} {...component} onAction={onAction} className={extraClassName} />;
     case 'filler':
-      return <LfFiller key={key} {...component} />;
+      // Default behavior should match .mdBxFiller { flex: 1 0 0; }
+      // When flex is not provided, default to flex=1 to emulate spacer behavior
+      return <LfFiller key={key} {...component} flex={component.flex ?? 1} className={extraClassName} />;
     case 'icon':
-      return <LfIcon key={key} {...component} />;
+      return <LfIcon key={key} {...component} className={extraClassName} />;
     case 'image':
-      return <LfImage key={key} {...component} onAction={onAction} />;
+      return <LfImage key={key} {...component} onAction={onAction} className={extraClassName} />;
     case 'separator':
-      return <LfSeparator key={key} {...component} layout={layout} />;
+      return <LfSeparator key={key} {...component} layout={layout} className={extraClassName} />;
     case 'spacer':
-      return <LfSpacer key={key} {...component} />;
+      return <LfSpacer key={key} {...component} className={extraClassName} />;
     case 'text':
-      return <LfText key={key} {...component} layout={layout} onAction={onAction} />;
+      return <LfText key={key} {...component} layout={layout} onAction={onAction} className={extraClassName} />;
     case 'video':
-      return <LfVideo key={key} {...component} />;
+      return <LfVideo key={key} {...component} className={extraClassName} />;
     default:
       return null;
   }
@@ -105,8 +107,6 @@ const LfBox = React.forwardRef<HTMLDivElement, LfBoxProps>(
   ) => {
     const marginClass = getMarginClass(margin);
     const marginStyle = getMarginStyle(margin);
-    const spacingClass = getSpacingClass(spacing);
-    const spacingStyle = getSpacingStyle(spacing);
     const offsetStyles = getOffsetStyles(offsetTop, offsetBottom, offsetStart, offsetEnd);
     const paddingStyles = getPaddingStyles(paddingAll, paddingTop, paddingBottom, paddingStart, paddingEnd);
     const flexClass = getFlexClass(flex);
@@ -119,7 +119,6 @@ const LfBox = React.forwardRef<HTMLDivElement, LfBoxProps>(
 
     const containerStyle: React.CSSProperties = {
       ...marginStyle,
-      ...spacingStyle,
       ...offsetStyles,
       ...paddingStyles,
       ...flexStyle,
@@ -144,7 +143,6 @@ const LfBox = React.forwardRef<HTMLDivElement, LfBoxProps>(
           layoutVariants({ layout }),
           // Default to flex-1 when flex is not specified (matching .MdBx behavior)
           flex === undefined ? 'flex-1' : flexClass,
-          spacingClass,
           marginClass,
           cornerRadiusClass,
           borderWidthClass,
@@ -159,7 +157,13 @@ const LfBox = React.forwardRef<HTMLDivElement, LfBoxProps>(
         onClick={clickHandler}
       >
         {contents.map((component: FlexComponent, index: number) =>
-          renderLfFlexComponent(component, index, layout, onAction),
+          renderLfFlexComponent(
+            component,
+            index,
+            layout,
+            onAction,
+            getChildSpacingClass(spacing, layout, index, component.type),
+          ),
         )}
       </div>
     );

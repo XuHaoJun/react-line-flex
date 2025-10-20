@@ -84,6 +84,8 @@ const LfText = React.forwardRef<HTMLDivElement, LfTextProps>(
       ...(lineSpacing && {
         lineHeight: `${parseInt(lineSpacing.replace('px', '')) + 15}px`,
       }),
+      // Match flex2html default baseline line-height of 1.4 when no explicit lineSpacing
+      ...(!lineSpacing && { lineHeight: 1.4 }),
       ...(maxLines && {
         display: '-webkit-box',
         WebkitLineClamp: maxLines,
@@ -142,7 +144,7 @@ const LfText = React.forwardRef<HTMLDivElement, LfTextProps>(
       <div
         ref={ref}
         className={cn(
-          'relative min-w-0 max-w-full flex flex-col',
+          'relative flex max-w-full min-w-0 flex-col',
           // Default to flex-1 when flex is not specified (matching .MdTxt behavior)
           flex === undefined ? 'flex-1' : flexClass,
           sizeClass,
