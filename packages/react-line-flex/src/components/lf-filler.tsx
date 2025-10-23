@@ -9,7 +9,7 @@ export interface LfFillerProps extends FlexFiller {
   className?: string;
 }
 
-const LfFiller = React.forwardRef<HTMLDivElement, LfFillerProps>(({ flex, className }, ref) => {
+const LfFiller = React.forwardRef<HTMLDivElement, LfFillerProps>(({ flex = 1, className }, ref) => {
   const flexClass = getFlexClass(flex);
   const flexStyle = getFlexStyle(flex);
 

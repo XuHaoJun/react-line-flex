@@ -50,9 +50,7 @@ export function renderLfFlexComponent(
     case 'button':
       return <LfButton key={key} {...component} onAction={onAction} className={extraClassName} />;
     case 'filler':
-      // Default behavior should match .mdBxFiller { flex: 1 0 0; }
-      // When flex is not provided, default to flex=1 to emulate spacer behavior
-      return <LfFiller key={key} {...component} flex={component.flex ?? 1} className={extraClassName} />;
+      return <LfFiller key={key} {...component} className={extraClassName} />;
     case 'icon':
       return <LfIcon key={key} {...component} className={extraClassName} />;
     case 'image':
