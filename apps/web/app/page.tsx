@@ -1,8 +1,14 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
+import { Copy } from 'lucide-react';
+
 import { Button } from '@workspace/ui/components/button';
 import { CodeBlock } from '@workspace/ui/components/code-block';
 import { LfMessage } from '@workspace/ui/components/line-flex';
+import { toast } from '@workspace/ui/components/toast';
+import { generateFlexJSXFromJSON } from '@workspace/ui/lib/flex-codegen';
 
 import flexSamples from './flex-samples.json';
 
@@ -13,6 +19,53 @@ export default function Home() {
       window.open(action.uri, '_blank');
     }
   };
+
+  // Codegen state
+  const [jsonInput, setJsonInput] = useState<string>(
+    JSON.stringify(
+      {
+        type: 'flex',
+        altText: 'This is a flex message',
+        contents: {
+          type: 'bubble',
+          body: {
+            type: 'box',
+            layout: 'vertical',
+            contents: [
+              {
+                type: 'text',
+                text: 'Hello, World!',
+              },
+            ],
+          },
+        },
+      },
+      null,
+      2,
+    ),
+  );
+  const [output, setOutput] = useState<string>('');
+  const [error, setError] = useState<string>('');
+
+  useEffect(() => {
+    let cancelled = false;
+    try {
+      const parsed = JSON.parse(jsonInput);
+      const jsx = generateFlexJSXFromJSON(parsed);
+      if (!cancelled) {
+        setOutput(jsx);
+        setError('');
+      }
+    } catch (e: any) {
+      if (!cancelled) {
+        setOutput('');
+        setError(e?.message || 'Invalid JSON');
+      }
+    }
+    return () => {
+      cancelled = true;
+    };
+  }, [jsonInput]);
 
   return (
     <div className="from-background via-background to-muted min-h-screen bg-gradient-to-br">
@@ -55,6 +108,9 @@ export default function Home() {
             <a href="#examples">View Examples</a>
           </Button>
           <Button size="lg" variant="outline" asChild>
+            <a href="#code-generator"> Try Code Generator</a>
+          </Button>
+          <Button size="lg" variant="outline" asChild>
             <a href="https://developers.line.biz/en/docs/messaging-api/using-flex-messages/" target="_blank">
               LINE Docs
             </a>
@@ -75,60 +131,70 @@ export default function Home() {
       <section className="container mx-auto mt-4 px-4">
         <h3 className="mb-8 text-center text-3xl font-bold">Usage</h3>
         <CodeBlock language="tsx" theme="monokai" showLineNumbers={true}>
-          {`import { LfMessage } from "@/components/ui/line-flex";
+          {`import { LfMessage, LfBubble, LfBox, LfText } from "@/components/ui/line-flex";
 
-const message = {
-  type: "flex",
-  altText: "Flex Message",
-  contents: {
-    type: "bubble",
-    hero: {
-      type: "image",
-      url: "https://developers-resource.landpress.line.me/fx/img/01_1_cafe.png",
-      size: "full",
-      aspectRatio: "20:13",
-      aspectMode: "cover",
-      action: {
-        type: "uri",
-        uri: "https://line.me/",
+const Example1 = () => {
+  const message = {
+    type: "flex",
+    altText: "Flex Message",
+    contents: {
+      type: "bubble",
+      hero: {
+        type: "image",
+        url: "https://developers-resource.landpress.line.me/fx/img/01_1_cafe.png",
+        size: "full",
+        aspectRatio: "20:13",
+        aspectMode: "cover",
+        action: {
+          type: "uri",
+          uri: "https://line.me/",
+        },
+      },
+      body: {
+        type: "box",
+        layout: "vertical",
+        contents: [
+          {
+            type: "text",
+            text: "Brown Cafe",
+            weight: "bold",
+            size: "xl",
+          },
+        ],
+      },
+      footer: {
+        type: "box",
+        layout: "vertical",
+        spacing: "sm",
+        contents: [
+          {
+            type: "button",
+            style: "link",
+            height: "sm",
+            action: {
+              type: "uri",
+              label: "CALL",
+              uri: "https://line.me/",
+            },
+          },
+        ],
+        flex: 0,
       },
     },
-    body: {
-      type: "box",
-      layout: "vertical",
-      contents: [
-        {
-          type: "text",
-          text: "Brown Cafe",
-          weight: "bold",
-          size: "xl",
-        },
-      ],
-    },
-    footer: {
-      type: "box",
-      layout: "vertical",
-      spacing: "sm",
-      contents: [
-        {
-          type: "button",
-          style: "link",
-          height: "sm",
-          action: {
-            type: "uri",
-            label: "CALL",
-            uri: "https://line.me/",
-          },
-        },
-      ],
-      flex: 0,
-    },
-  },
+  };
+  return <LfMessage {...message} />;
 };
 
-const Example = () => {
-  return <LfMessage {...message} />;
-};`}
+const Example2 = () => {
+  return (
+    <LfBubble>
+      <LfBox layout="vertical">
+        <LfText text="Hello, World!" layout="vertical" />
+      </LfBox>
+    </LfBubble>
+  );
+};
+`}
         </CodeBlock>
       </section>
 
@@ -144,15 +210,68 @@ const Example = () => {
             <div key={index} className="flex w-[500px] flex-col gap-2">
               <div className="flex items-center justify-between">
                 <span className="text-muted-foreground text-xs font-medium">{sample.title}</span>
-                <span className="bg-primary/10 text-primary rounded-full px-2 py-0.5 text-xs font-medium">
-                  {sample.content.contents.type}
-                </span>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    try {
+                      navigator.clipboard.writeText(JSON.stringify(sample.content, null, 2));
+                      toast.success('JSON copied to clipboard');
+                    } catch {}
+                  }}
+                >
+                  <Copy className="h-4 w-4" />
+                  Copy JSON
+                </Button>
               </div>
               <div className="flex min-h-[800px] w-full overflow-hidden rounded-lg border bg-[#849EBF] p-1 pt-[50px] pb-4 pl-5 shadow-sm transition-shadow hover:shadow-lg">
                 <LfMessage className="h-full w-full" {...(sample.content as unknown as any)} onAction={handleAction} />
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Code Generator Section */}
+      <section id="code-generator" className="container mx-auto px-4 py-16">
+        <h3 className="mb-8 text-center text-3xl font-bold">Code Generator</h3>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-medium">JSON Input</span>
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    try {
+                      const parsed = JSON.parse(jsonInput);
+                      setJsonInput(JSON.stringify(parsed, null, 2));
+                    } catch {}
+                  }}
+                >
+                  Format
+                </Button>
+              </div>
+            </div>
+            <textarea
+              className="bg-card text-card-foreground min-h-[420px] w-full resize-y rounded-md border p-3 font-mono text-sm"
+              value={jsonInput}
+              onChange={(e) => setJsonInput(e.target.value)}
+              spellCheck={false}
+            />
+            {error && <div className="text-destructive text-sm">{error}</div>}
+          </div>
+          <div className="flex min-h-[420px] flex-col gap-3">
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-medium">Generated JSX</span>
+            </div>
+            <div className="min-h-[420px] overflow-hidden rounded-md border">
+              <CodeBlock language="tsx" theme="monokai" showLineNumbers={false}>
+                {output || '// Result will appear here'}
+              </CodeBlock>
+            </div>
+          </div>
         </div>
       </section>
 
