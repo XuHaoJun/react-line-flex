@@ -77,7 +77,7 @@ export default function Home() {
             <span className="bg-primary text-primary-foreground rounded-full px-2 py-0.5 text-xs">v0.0.1</span>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm" asChild>
+            <Button variant="ghost" size="icon" asChild>
               <a href="https://github.com/xuhaojun/react-line-flex" target="_blank" rel="noopener noreferrer">
                 <svg width="20" height="20" viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg">
                   <path
