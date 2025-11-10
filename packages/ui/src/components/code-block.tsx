@@ -2,21 +2,65 @@
 
 import { useState } from 'react';
 
-import { ShikiHighlighter, ShikiHighlighterProps } from 'react-shiki/web';
+import { ShikiHighlighterProps, useShikiHighlighter } from 'react-shiki/web';
 
 export interface CodeBlockProps extends ShikiHighlighterProps {}
 
-export function CodeBlock({ ...props }: CodeBlockProps) {
+export function CodeBlock({
+  language,
+  theme,
+  children,
+  showLineNumbers,
+  startingLineNumber,
+  ...options
+}: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
+  const code = (children as string) || '';
+
+  const highlightedCode = useShikiHighlighter(code, language, theme, {
+    showLineNumbers,
+    startingLineNumber,
+    outputFormat: 'html',
+    ...options,
+  });
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText((props.children as string).trim());
+      await navigator.clipboard.writeText(code.trim());
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error('Failed to copy:', err);
     }
+  };
+
+  // Placeholder: unhighlighted code with fake background color
+  const placeholder = (
+    <pre
+      className="overflow-x-auto p-4 font-mono text-sm"
+      style={{
+        backgroundColor: '#272822', // monokai background color as default
+        color: '#f8f8f2', // monokai foreground color
+        margin: 0,
+      }}
+    >
+      <code style={{ display: 'block' }}>{code}</code>
+    </pre>
+  );
+
+  // Render highlighted code or placeholder
+  const renderCode = () => {
+    if (!highlightedCode) {
+      return placeholder;
+    }
+
+    // Handle string output (HTML format)
+    if (typeof highlightedCode === 'string') {
+      return <div dangerouslySetInnerHTML={{ __html: highlightedCode }} />;
+    }
+
+    // Handle ReactNode output
+    return highlightedCode;
   };
 
   return (
@@ -63,7 +107,7 @@ export function CodeBlock({ ...props }: CodeBlockProps) {
           </span>
         )}
       </button>
-      <ShikiHighlighter {...props}>{props.children}</ShikiHighlighter>
+      {renderCode()}
     </div>
   );
 }
