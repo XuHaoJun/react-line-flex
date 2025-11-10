@@ -37,11 +37,12 @@ export function CodeBlock({
   // Placeholder: unhighlighted code with fake background color
   const placeholder = (
     <pre
-      className="overflow-x-auto p-4 font-mono text-sm"
+      className="overflow-x-auto p-4 font-mono text-[16px]"
       style={{
         backgroundColor: '#272822', // monokai background color as default
         color: '#f8f8f2', // monokai foreground color
         margin: 0,
+        paddingLeft: showLineNumbers ? '54px' : undefined,
       }}
     >
       <code style={{ display: 'block' }}>{code}</code>
@@ -56,7 +57,12 @@ export function CodeBlock({
 
     // Handle string output (HTML format)
     if (typeof highlightedCode === 'string') {
-      return <div dangerouslySetInnerHTML={{ __html: highlightedCode }} />;
+      return (
+        <div
+          className="[&_pre.shiki]:p-4 [&_pre.shiki]:text-[16px]"
+          dangerouslySetInnerHTML={{ __html: highlightedCode }}
+        />
+      );
     }
 
     // Handle ReactNode output
