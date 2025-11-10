@@ -2,17 +2,15 @@
 
 import { useEffect, useState } from 'react';
 
-import { Copy } from 'lucide-react';
-
 import { Button } from '@workspace/ui/components/button';
 import { CodeBlock } from '@workspace/ui/components/code-block';
 import { LfMessage } from '@workspace/ui/components/line-flex';
-import { toast } from '@workspace/ui/components/toast';
 import { generateFlexJSXFromJSON } from '@workspace/ui/lib/flex-codegen';
 
 import flexSamples from './flex-samples.json';
 
 export default function Home() {
+  const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const handleAction = (action: any) => {
     console.log('Action triggered:', action);
     if (action.type === 'uri') {
@@ -210,19 +208,56 @@ const Example2 = () => {
             <div key={index} className="flex w-[500px] flex-col gap-2">
               <div className="flex items-center justify-between">
                 <span className="text-muted-foreground text-xs font-medium">{sample.title}</span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
+                <button
+                  onClick={async () => {
                     try {
-                      navigator.clipboard.writeText(JSON.stringify(sample.content, null, 2));
-                      toast.success('JSON copied to clipboard');
-                    } catch {}
+                      await navigator.clipboard.writeText(JSON.stringify(sample.content, null, 2));
+                      setCopiedIndex(index);
+                      setTimeout(() => setCopiedIndex(null), 2000);
+                    } catch (err) {
+                      console.error('Failed to copy:', err);
+                    }
                   }}
+                  className="border-border bg-background/80 text-foreground hover:bg-background inline-flex items-center justify-center gap-1 rounded-md border px-3 py-1.5 text-xs font-medium backdrop-blur-sm transition-colors duration-200"
+                  aria-label="Copy JSON"
                 >
-                  <Copy className="h-4 w-4" />
-                  Copy JSON
-                </Button>
+                  {copiedIndex === index ? (
+                    <>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      Copied!
+                    </>
+                  ) : (
+                    <>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                      </svg>
+                      Copy JSON
+                    </>
+                  )}
+                </button>
               </div>
               <div className="flex min-h-[800px] w-full overflow-hidden rounded-lg border bg-[#849EBF] p-1 pt-[50px] pb-4 pl-5 shadow-sm transition-shadow hover:shadow-lg">
                 <LfMessage className="h-full w-full" {...(sample.content as unknown as any)} onAction={handleAction} />
