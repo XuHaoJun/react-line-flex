@@ -33,7 +33,6 @@ const LfButton = React.forwardRef<HTMLDivElement, LfButtonProps>(
       style = 'link',
       color,
       gravity,
-      adjustMode,
       onAction,
       className,
     },
@@ -61,7 +60,7 @@ const LfButton = React.forwardRef<HTMLDivElement, LfButtonProps>(
       <div
         ref={ref}
         className={cn(
-          'flex flex-col relative min-w-0 max-w-full',
+          'relative flex max-w-full min-w-0 flex-col',
           // Default to flex-1 when flex is not specified (matching .MdBtn behavior)
           flex === undefined ? 'flex-1' : flexClass,
           marginClass,

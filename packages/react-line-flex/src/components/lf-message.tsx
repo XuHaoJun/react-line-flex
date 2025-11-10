@@ -72,7 +72,7 @@ const LfMessage = React.forwardRef<HTMLDivElement, LfMessageProps>(
 
     // This should never happen with proper TypeScript types, but adding for runtime safety
     throw new Error(
-      `Invalid contents type: expected 'bubble' or 'carousel', but received '${(contents as any).type}'.`,
+      `Invalid contents type: expected 'bubble' or 'carousel', but received '${(contents as { type?: unknown }).type}'.`,
     );
   },
 );
