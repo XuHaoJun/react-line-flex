@@ -1,14 +1,81 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import React from 'react';
 
 import { Button } from '@workspace/ui/components/button';
 import { CodeBlock } from '@workspace/ui/components/code-block';
+import {
+  LfBubble,
+  LfCarousel,
+  LfBox,
+  LfText,
+  LfSpan,
+  LfImage,
+  LfIcon,
+  LfButton,
+  LfSeparator,
+  LfSpacer,
+  LfFiller,
+  LfVideo,
+} from '@workspace/ui/components/line-flex';
 import { generateFlexJSXFromJSON } from '@workspace/ui/lib/flex-codegen';
 
 import { FlexMessageEditor } from '@/components/flex-message-editor';
 
 import flexSamples from './flex-samples.json';
+
+// Dynamic renderer that creates React components from Flex JSON
+function renderFlexFromJSON(data: any): React.ReactElement | null {
+  if (!data || typeof data !== 'object') return null;
+
+  switch (data.type) {
+    case 'flex':
+      return renderFlexFromJSON(data.contents);
+    case 'bubble':
+      return React.createElement(
+        LfBubble,
+        data,
+        [
+          data.header && renderFlexFromJSON(data.header),
+          data.hero && renderFlexFromJSON(data.hero),
+          data.body && renderFlexFromJSON(data.body),
+          data.footer && renderFlexFromJSON(data.footer),
+        ].filter(Boolean),
+      );
+    case 'carousel':
+      return React.createElement(
+        LfCarousel,
+        { type: 'carousel', contents: data.contents || [] },
+        data.contents?.map(renderFlexFromJSON).filter(Boolean) || [],
+      );
+    case 'box':
+      return React.createElement(LfBox, data, data.contents?.map(renderFlexFromJSON).filter(Boolean) || []);
+    case 'text':
+      if (data.contents && data.contents.length > 0) {
+        return React.createElement(LfText, data, data.contents.map(renderFlexFromJSON));
+      }
+      return React.createElement(LfText, data);
+    case 'span':
+      return React.createElement(LfSpan, data);
+    case 'image':
+      return React.createElement(LfImage, data);
+    case 'icon':
+      return React.createElement(LfIcon, data);
+    case 'button':
+      return React.createElement(LfButton, data);
+    case 'separator':
+      return React.createElement(LfSeparator, data);
+    case 'spacer':
+      return React.createElement(LfSpacer, data);
+    case 'filler':
+      return React.createElement(LfFiller, data);
+    case 'video':
+      return React.createElement(LfVideo, data);
+    default:
+      return null;
+  }
+}
 
 export default function Home() {
   const handleAction = (action: any) => {
@@ -43,6 +110,7 @@ export default function Home() {
     ),
   );
   const [output, setOutput] = useState<string>('');
+  const [preview, setPreview] = useState<React.ReactElement | null>(null);
   const [error, setError] = useState<string>('');
 
   useEffect(() => {
@@ -50,13 +118,16 @@ export default function Home() {
     try {
       const parsed = JSON.parse(jsonInput);
       const jsx = generateFlexJSXFromJSON(parsed);
+      const previewComponent = renderFlexFromJSON(parsed);
       if (!cancelled) {
         setOutput(jsx);
+        setPreview(previewComponent);
         setError('');
       }
     } catch (e: any) {
       if (!cancelled) {
         setOutput('');
+        setPreview(null);
         setError(e?.message || 'Invalid JSON');
       }
     }
@@ -209,7 +280,7 @@ const Example2 = () => {
       {/* Code Generator Section */}
       <section id="code-generator" className="container mx-auto px-4 py-16">
         <h3 className="mb-8 text-center text-3xl font-bold">Code Generator</h3>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium">JSON Input</span>
@@ -244,6 +315,20 @@ const Example2 = () => {
               <CodeBlock language="tsx" theme="monokai" showLineNumbers={false}>
                 {output || '// Result will appear here'}
               </CodeBlock>
+            </div>
+          </div>
+          <div className="flex min-h-[420px] flex-col gap-3">
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-medium">Live Preview (based on generated code not JSON to render)</span>
+            </div>
+            <div className="flex min-h-[800px] w-full overflow-hidden rounded-lg border bg-[#849EBF] p-1 pt-[50px] pb-4 pl-5 shadow-sm transition-shadow hover:shadow-lg">
+              {preview ? (
+                <div className="h-full w-full">{preview}</div>
+              ) : (
+                <div className="text-muted-foreground flex h-full items-center justify-center text-sm">
+                  Preview will appear here
+                </div>
+              )}
             </div>
           </div>
         </div>
