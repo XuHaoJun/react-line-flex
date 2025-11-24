@@ -156,7 +156,7 @@ export function FlexMessageEditor({ samples, onAction }: FlexMessageEditorProps)
       {/* JSON Editor Modal */}
       {editingIndex !== null && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-background flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-lg border shadow-xl">
+          <div className="bg-background flex max-h-[90vh] min-h-[70vh] w-full max-w-4xl flex-col overflow-hidden rounded-lg border shadow-xl">
             <div className="flex items-center justify-between border-b p-4">
               <h3 className="text-lg font-semibold">Edit Flex Message JSON</h3>
               <div className="flex gap-2">
