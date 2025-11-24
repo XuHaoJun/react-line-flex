@@ -203,54 +203,7 @@ export default function Home() {
           {`import { LfMessage, LfBubble, LfBox, LfText } from "@/components/ui/line-flex";
 
 const Example1 = () => {
-  const message = {
-    type: "flex",
-    altText: "Flex Message",
-    contents: {
-      type: "bubble",
-      hero: {
-        type: "image",
-        url: "https://developers-resource.landpress.line.me/fx/img/01_1_cafe.png",
-        size: "full",
-        aspectRatio: "20:13",
-        aspectMode: "cover",
-        action: {
-          type: "uri",
-          uri: "https://line.me/",
-        },
-      },
-      body: {
-        type: "box",
-        layout: "vertical",
-        contents: [
-          {
-            type: "text",
-            text: "Brown Cafe",
-            weight: "bold",
-            size: "xl",
-          },
-        ],
-      },
-      footer: {
-        type: "box",
-        layout: "vertical",
-        spacing: "sm",
-        contents: [
-          {
-            type: "button",
-            style: "link",
-            height: "sm",
-            action: {
-              type: "uri",
-              label: "CALL",
-              uri: "https://line.me/",
-            },
-          },
-        ],
-        flex: 0,
-      },
-    },
-  };
+  const message = { type: "flex", altText: "Flex Message", contents: { type: "bubble", hero: { type: "image", url: "https://developers-resource.landpress.line.me/fx/img/01_1_cafe.png", size: "full", aspectRatio: "20:13", aspectMode: "cover", action: { type: "uri", uri: "https://line.me/" } }, body: { type: "box", layout: "vertical", contents: [{ type: "text", text: "Brown Cafe", weight: "bold", size: "xl" }] }, footer: { type: "box", layout: "vertical", spacing: "sm", contents: [{ type: "button", style: "link", height: "sm", action: { type: "uri", label: "CALL", uri: "https://line.me/" } }], flex: 0 } } };
   return <LfMessage {...message} />;
 };
 
